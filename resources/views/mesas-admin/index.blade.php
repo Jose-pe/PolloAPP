@@ -1,4 +1,4 @@
 @extends('layouts.layoutadmin')
 @section('content')
-        ESTE ES MI INDEX DE POLLO APP
+        <h1>aqui listaremos las mesas </h1>
 @endsection
