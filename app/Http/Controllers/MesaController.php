@@ -44,7 +44,7 @@ class MesaController extends Controller
         $input = $request->all();
         $mesa = Mesa::create($input);
 
-        return redirect()->route('mesas.index')->with('status','Se ah creado una nueva mesa');
+        return redirect()->route('mesa.index')->with('status','Se ah creado una nueva mesa');
     }
 
     /**
@@ -64,9 +64,11 @@ class MesaController extends Controller
      * @param  \App\Models\Mesa  $mesa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mesa $mesa)
+    public function edit($id)
     {
         //
+        $mesa= Mesa::find($id);
+        return view('mesas-admin.edit', compact('mesa'));
     }
 
     /**
@@ -87,8 +89,13 @@ class MesaController extends Controller
      * @param  \App\Models\Mesa  $mesa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mesa $mesa)
+    public function destroy($id)
     {
-        //
+     
+        $mesa = Mesa::find($id);
+        $mesa->delete();
+        return redirect()->route('mesa.index')->with('status','Se ah eliminado la mesa');
+
+        
     }
 }
