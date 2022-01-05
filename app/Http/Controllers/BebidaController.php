@@ -15,6 +15,8 @@ class BebidaController extends Controller
     public function index()
     {
         //
+        $bebidas = Bebida::all();
+        return view('bebidas-admin.index', compact('bebidas'));
     }
 
     /**
@@ -25,6 +27,7 @@ class BebidaController extends Controller
     public function create()
     {
         //
+        return view('bebidas-admin.create');
     }
 
     /**
@@ -36,6 +39,10 @@ class BebidaController extends Controller
     public function store(Request $request)
     {
         //
+        $input= $request->all();
+        $bebida= Bebida::create($input);
+
+        return redirect()->route('bebida.index')->with('status','Se ha creado una nueba bebida');
     }
 
     /**
@@ -55,9 +62,11 @@ class BebidaController extends Controller
      * @param  \App\Models\Bebida  $bebida
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bebida $bebida)
+    public function edit($id)
     {
         //
+        $bebida = Bebida::find($id);
+        return view('bebidas-admin.edit', compact('bebida'));
     }
 
     /**
@@ -67,9 +76,13 @@ class BebidaController extends Controller
      * @param  \App\Models\Bebida  $bebida
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bebida $bebida)
+    public function update(Request $request, $id)
     {
         //
+        $input = $request->all();
+        $bebida = Bebida::find($id);
+        $bebida->update($input);
+        return redirect()->route('bebida.index')->with('status','Se ah modificado una bebida');
     }
 
     /**
@@ -78,8 +91,12 @@ class BebidaController extends Controller
      * @param  \App\Models\Bebida  $bebida
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bebida $bebida)
+    public function destroy($id)
     {
         //
+        $bebida = Bebida::find($id);
+        $bebida->delete();
+        return redirect()->route('bebida.index')->with('status','Se ha eliminado una bebida');
+
     }
 }

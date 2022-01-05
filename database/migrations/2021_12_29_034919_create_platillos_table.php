@@ -18,7 +18,7 @@ class CreatePlatillosTable extends Migration
             $table->string('nombreplatillo');
             $table->string('tamanio');
             $table->string('descripcion');
-            $table->double('precio', 8,2)->change();
+            $table->double('precio', 8,2);
             $table->timestamps();
         });
     }

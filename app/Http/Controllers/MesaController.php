@@ -67,6 +67,7 @@ class MesaController extends Controller
     public function edit($id)
     {
         //
+        
         $mesa= Mesa::find($id);
         return view('mesas-admin.edit', compact('mesa'));
     }
@@ -78,9 +79,15 @@ class MesaController extends Controller
      * @param  \App\Models\Mesa  $mesa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mesa $mesa)
+    public function update(Request $request, $id)
     {
         //
+        $input= $request->all();
+        $mesa= Mesa::find($id);
+        $mesa->update($input);
+        return redirect()->route('mesa.index')->with('status','Se ah editado una mesa');
+
+
     }
 
     /**

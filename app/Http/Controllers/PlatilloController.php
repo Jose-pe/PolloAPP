@@ -15,6 +15,8 @@ class PlatilloController extends Controller
     public function index()
     {
         //
+        $platillos= Platillo::all();
+        return view('platillos-admin.index', compact('platillos'));
     }
 
     /**
@@ -25,6 +27,7 @@ class PlatilloController extends Controller
     public function create()
     {
         //
+        return view('platillos-admin.create');
     }
 
     /**
@@ -36,6 +39,10 @@ class PlatilloController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $platillo = Platillo::create($input);
+
+        return redirect()->route('platillo.index')->with('status', "Se ha creado un nuevo platillo");
     }
 
     /**
@@ -55,9 +62,11 @@ class PlatilloController extends Controller
      * @param  \App\Models\Platillo  $platillo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Platillo $platillo)
+    public function edit($id)
     {
         //
+        $platillo= Platillo::find($id);
+        return view('platillos-admin.edit', compact('platillo'));
     }
 
     /**
@@ -67,9 +76,13 @@ class PlatilloController extends Controller
      * @param  \App\Models\Platillo  $platillo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Platillo $platillo)
+    public function update(Request $request, $id)
     {
         //
+        $input= $request->all();
+        $platillo= Platillo::find($id);
+        $platillo->update($input);
+        return redirect()->route('platillo.index')->with('status','Se ah eliminado un platillo');
     }
 
     /**
@@ -78,8 +91,11 @@ class PlatilloController extends Controller
      * @param  \App\Models\Platillo  $platillo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Platillo $platillo)
+    public function destroy($id)
     {
         //
+        $platillo= Platillo::find($id);
+        $platillo->delete();
+        return redirect()->route('platillo.index')->with('status','Se ha eliminado el platillo');
     }
 }

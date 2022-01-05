@@ -15,6 +15,8 @@ class ComplementoController extends Controller
     public function index()
     {
         //
+        $complementos = Complemento::all();
+        return view('complementos-admin.index', compact('complementos'));
     }
 
     /**
@@ -25,6 +27,7 @@ class ComplementoController extends Controller
     public function create()
     {
         //
+        return view('complementos-admin.create');
     }
 
     /**
@@ -36,6 +39,10 @@ class ComplementoController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $complemento = Complemento::create($input);
+
+        return redirect()->route('complemento.index')->with('status','Se ah creado un nuevo complemento');
     }
 
     /**
@@ -55,9 +62,11 @@ class ComplementoController extends Controller
      * @param  \App\Models\Complemento  $complemento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Complemento $complemento)
+    public function edit($id)
     {
         //
+        $complemento= Complemento::find($id);
+        return view('complementos-admin.edit', compact('complemento'));
     }
 
     /**
@@ -67,9 +76,13 @@ class ComplementoController extends Controller
      * @param  \App\Models\Complemento  $complemento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Complemento $complemento)
+    public function update(Request $request, $id)
     {
         //
+        $input= $request->all();
+        $complemento= Complemento::find($id);
+        $complemento->update($input);
+        return redirect()->route('complemento.index')->with('status','Se ah modificado un complemento');
     }
 
     /**
@@ -78,8 +91,11 @@ class ComplementoController extends Controller
      * @param  \App\Models\Complemento  $complemento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Complemento $complemento)
+    public function destroy($id)
     {
         //
+        $complemento = Complemento::find($id);
+        $complemento->delete();
+        return redirect()->route('complemento.index')->with('status', 'Se ah eliminado un complemento');
     }
 }

@@ -15,7 +15,7 @@
         </div>
         
         <div class="input-group input-group-lg mb-3">
-                 <input type="text"  name="nrosillas" class="form-control" required placeholder="Numero de sillas de la mesa">
+                 <input type="number"  name="nrosillas" class="form-control" required placeholder="Numero de sillas de la mesa">
         </div>
         
         <select class="form-select form-select-lg mb-3" name="estado">

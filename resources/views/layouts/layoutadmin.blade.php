@@ -21,10 +21,9 @@
                     <div class="navbar-nav">
                       
                       <a class="nav-link" href="{{route('mesa.index')}}">Mesas</a>
-                      <a class="nav-link" href="">Platillos</a>
-                      <a class="nav-link" href="">Bebidas</a>
-                      <a class="nav-link" href="">Complementos</a>
-                      <a class="nav-link" href="{{route('mesa.create')}}">Crear Mesa</a>
+                      <a class="nav-link" href="{{route('platillo.index')}}">Platillos</a>
+                      <a class="nav-link" href="{{route('bebida.index')}}">Bebidas</a>
+                      <a class="nav-link" href="{{route('complemento.index')}}">Complementos</a>
                       <a class="nav-link disabled">Crear Cajero</a>
                     </div>
                   </div>
