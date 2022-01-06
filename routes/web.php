@@ -17,6 +17,7 @@ Route::resource('mesa', MesaController::class);
 Route::resource('platillo', App\Http\Controllers\PlatilloController::class);
 Route::resource('bebida', App\Http\Controllers\BebidaController::class);
 Route::resource('complemento', App\Http\Controllers\ComplementoController::class);
+Route::get('mesascajero',[App\Http\Controllers\MesaController::class, 'mostrarmesas'])->name('mesascajero');
 
 Route::get('/', function () {
     return view('welcome');

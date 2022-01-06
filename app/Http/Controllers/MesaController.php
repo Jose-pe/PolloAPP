@@ -56,6 +56,7 @@ class MesaController extends Controller
     public function show(Mesa $mesa)
     {
         //
+      
     }
 
     /**
@@ -104,5 +105,11 @@ class MesaController extends Controller
         return redirect()->route('mesa.index')->with('status','Se ah eliminado la mesa');
 
         
+    }
+
+    public function mostrarmesas()
+    {
+        $mesas = Mesa::all();
+        return view('mesas-cajero.index', compact('mesas'));
     }
 }

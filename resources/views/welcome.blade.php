@@ -1,4 +1,9 @@
 @extends('layouts.layoutadmin')
 @section('content')
-        ESTE ES MI INDEX DE POLLO APP
+        <section class="container">
+              
+
+                <a href="{{route('mesascajero')}}">entrar como cajero</a>
+
+        </section>
 @endsection

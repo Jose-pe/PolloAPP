@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
-    <title>PolloApp - Admin</title>
-    
+    <title>PolloApp CAJERO</title>
 </head>
 <body>
     <header>
@@ -18,32 +17,27 @@
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                      
-                      <a class="nav-link" href="{{route('mesa.index')}}">Mesas</a>
-                      <a class="nav-link" href="{{route('platillo.index')}}">Platillos</a>
-                      <a class="nav-link" href="{{route('bebida.index')}}">Bebidas</a>
-                      <a class="nav-link" href="{{route('complemento.index')}}">Complementos</a>
-                      <a class="nav-link">Crear Cajero</a>
-                      <a class="nav-link">Ver Reportes</a>
-                      <a class="nav-link">Ver Boletas</a>
+                    <div class="navbar-nav">                    
+                      <a class="nav-link">Mesas</a>
+                      <a class="nav-link">Para Llevar</a>
+                      <a class="nav-link">Pedidos</a>
+                      <a class="nav-link">Nuevo Pedido</a>
+                      <a class="nav-link"></a>
                     </div>
                   </div>
                 </div>
               </nav>
-           
-            
-           
-            
-        </div>
-        </nav>
     </header>
     <section class="container">
-        @yield('content')
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
+
     </section>
-    <footer class="footer">
-        <p>Footer</p>
-    </footer>
-    
+    <section>
+    @yield('content')
+    </section>
 </body>
 </html>

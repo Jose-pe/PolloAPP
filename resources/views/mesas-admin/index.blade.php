@@ -24,7 +24,11 @@
                 <th scope="row">#</th>
                 <td>{{$mesa->nromesa}}</td>
                 <td>{{$mesa->nrosillas}}</td>
-                <td>{{$mesa->estado}}</td>
+                <td>  @if ($mesa->estado == 1)
+                        <p class="badge rounded-pill bg-success">LIBRE</p>
+                        @else
+                        <p class="badge rounded-pill bg-danger">OCUPADO</p>   
+                        @endif</td>
                 <td class="btn-group"> 
                        
                         <a class="btn btn-success" href="{{route('mesa.edit', $mesa->id)}}">EDIT</a>
@@ -47,24 +51,30 @@
 </div>
 <section class="container">
         <div class="row align-items-center">
+        @foreach ($mesas as $mesa )
         <div class="col">
-                <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="card mesa mt-5" style="width: 15rem; height: 15rem;">
+                        
+                        <div class="card-body mt-4">
+                                <h5>{{$mesa->nromesa}}</h5>
+                                <p class="card-text">{{$mesa->nrosillas}} <i>iconosilla</i> </p>
+                                @if ($mesa->estado == 1)
+                                <p class="badge rounded-pill bg-success">LIBRE</p>
+                                @else
+                                <p class="badge rounded-pill bg-danger">OCUPADO</p>   
+                                @endif
+                                
+                            
+
                         </div>
                       </div>
         </div>
 
-        <div class="col">
-                <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                      </div>
-        </div>
-        </div>
+       @endforeach
+        
+      
+      
+       </div>
 </section>
 
 @endsection
