@@ -53,9 +53,11 @@ class MesaController extends Controller
      * @param  \App\Models\Mesa  $mesa
      * @return \Illuminate\Http\Response
      */
-    public function show(Mesa $mesa)
+    public function show($id)
     {
         //
+        $mesa= Mesa::find($id);
+        return view('mesas-cajero.show', compact('mesa'));
       
     }
 
