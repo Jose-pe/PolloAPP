@@ -35,12 +35,15 @@
                             <button type="button" class="btn btn-warning m-2">Bebidas</button>
                             <button type="button" class="btn btn-warning m-2">Complementos</button>
                         </div>   
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div id="platos" class="alert alert-warning alert-dismissible fade show" role="alert">
                             <form action="">
                                 <div class="mb-3">
                                     <label for="plato" class="form-label">Plato</label>
                                     <select  class="form-select" name="plato" id="plato">
-                                        <option value="value1">Nuestros Platos</option>
+                                      @foreach ($platillos as $platillo)
+                                      <option value="{{$platillo->id}}">{{$platillo->nombreplatillo}} - {{$platillo->tamanio}}</option>
+
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="mb-3">
@@ -52,6 +55,45 @@
                             <button class="btn  btn-primary btn-lg">Agregar Pedido</button>
                         </form>
                          </div>
+                         <div id="bebidas" class="alert alert-warning alert-dismissible fade show" role="alert">
+                          <form action="" method="get">
+                              <div class="mb-3">
+                                  <label for="plato" class="form-label">Bebidas</label>
+                                  <select  class="form-select" name="plato" id="plato">
+                                    @foreach ($bebidas as $bebida)
+                                    <option value="{{$bebida->id}}">{{$bebida->nombrebebida}} - {{$bebida->tamanio}}</option>
+                                    @endforeach
+                                     
+                                  </select>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="cantidad" class="form-label">Cantidad</label>
+                                  <input type="number" class="form-control" id="cantidad" placeholder="Ingresar la Cantidad para este Pedido">
+                                </div>
+                              
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          <button class="btn  btn-primary btn-lg">Agregar Bebida</button>
+                      </form>
+                       </div>
+                       <div id="complementos" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <form action="">
+                            <div class="mb-3">
+                                <label for="complemento" class="form-label">Complemento</label>
+                                <select  class="form-select" name="complemento" id="complemento">
+                                  @foreach ($complementos as $complemento)
+                                  <option value="{{$complemento->id}}">{{$complemento->nombrecomplemento}} - {{$complemento->tamanio}}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="cantidad" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="cantidad" placeholder="Ingresar la Cantidad para este Pedido">
+                              </div>
+                            
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button class="btn  btn-primary btn-lg">Agregar Complemento</button>
+                    </form>
+                     </div>
                     </article>
 
                     <div class="row mt-5">

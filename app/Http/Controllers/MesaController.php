@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mesa;
+use App\Models\Bebida;
+use App\Models\Platillo;
+use App\Models\Complemento;
 use Illuminate\Http\Request;
 
 class MesaController extends Controller
@@ -43,7 +46,7 @@ class MesaController extends Controller
         
         $input = $request->all();
         $mesa = Mesa::create($input);
-
+        
         return redirect()->route('mesa.index')->with('status','Se ah creado una nueva mesa');
     }
 
@@ -57,7 +60,10 @@ class MesaController extends Controller
     {
         //
         $mesa= Mesa::find($id);
-        return view('mesas-cajero.show', compact('mesa'));
+        $bebidas=Bebida::all();
+        $platillos= Platillo::all();
+        $complementos= Complemento::all();
+        return view('mesas-cajero.show', compact('mesa','bebidas','platillos','complementos'));
       
     }
 

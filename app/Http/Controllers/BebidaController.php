@@ -99,4 +99,10 @@ class BebidaController extends Controller
         return redirect()->route('bebida.index')->with('status','Se ha eliminado una bebida');
 
     }
+    public function mostrarbebida()
+    {
+       $bebidas = Bebida::all();
+       return view('mesas-cajero.show', compact('bebidas'));
+
+    }
 }
