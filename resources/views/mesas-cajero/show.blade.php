@@ -31,11 +31,11 @@
                 <section  class="row">
                     <article class="col">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-warning m-2">Platos</button>
-                            <button type="button" class="btn btn-warning m-2">Bebidas</button>
-                            <button type="button" class="btn btn-warning m-2">Complementos</button>
+                            <button type="button" id="botonplatos" class="btn btn-warning m-2">Platos</button>
+                            <button type="button" id="botonbebidas" class="btn btn-warning m-2">Bebidas</button>
+                            <button type="button" id="botoncomplementos" class="btn btn-warning m-2">Complementos</button>
                         </div>   
-                        <div id="platos" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div id="formplatos" class="alert alert-warning alert-dismissible fade show" role="alert">
                             <form action="">
                                 <div class="mb-3">
                                     <label for="plato" class="form-label">Plato</label>
@@ -52,10 +52,10 @@
                                   </div>
                                 
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            <button class="btn  btn-primary btn-lg">Agregar Pedido</button>
+                            <button class="btn  btn-primary btn-lg">Agregar Plato</button>
                         </form>
                          </div>
-                         <div id="bebidas" class="alert alert-warning alert-dismissible fade show" role="alert">
+                         <div id="formbebidas" class="alert alert-warning alert-dismissible fade show" role="alert">
                           <form action="" method="get">
                               <div class="mb-3">
                                   <label for="plato" class="form-label">Bebidas</label>
@@ -75,7 +75,7 @@
                           <button class="btn  btn-primary btn-lg">Agregar Bebida</button>
                       </form>
                        </div>
-                       <div id="complementos" class="alert alert-warning alert-dismissible fade show" role="alert">
+                       <div id="formcomplementos" class="alert alert-warning alert-dismissible fade show" role="alert">
                         <form action="">
                             <div class="mb-3">
                                 <label for="complemento" class="form-label">Complemento</label>

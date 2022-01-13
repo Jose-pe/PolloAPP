@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
     <title>PolloApp CAJERO</title>
 </head>
 <body>
@@ -39,5 +40,6 @@
     <section>
     @yield('content')
     </section>
+   <script src="../js/main.js"></script> 
 </body>
 </html>
