@@ -1,3 +1,6 @@
 #formplatos, #formbebidas, #formcomplementos{
     display: none;    
 }
+#precioplato{
+    display: none;
+}

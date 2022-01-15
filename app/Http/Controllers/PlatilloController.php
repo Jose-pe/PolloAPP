@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Platillo;
 use Illuminate\Http\Request;
+use Response;
 
 class PlatilloController extends Controller
 {
@@ -51,9 +52,11 @@ class PlatilloController extends Controller
      * @param  \App\Models\Platillo  $platillo
      * @return \Illuminate\Http\Response
      */
-    public function show(Platillo $platillo)
+    public function show()
     {
         //
+      
+
     }
 
     /**
@@ -97,5 +100,14 @@ class PlatilloController extends Controller
         $platillo= Platillo::find($id);
         $platillo->delete();
         return redirect()->route('platillo.index')->with('status','Se ha eliminado el platillo');
+    }
+
+    public function platillosjson(){
+        $platillos= Platillo::all();
+       
+        return Response::json(
+            array('success'=>true,
+                    'platillos' => $platillos
+        ),200);
     }
 }

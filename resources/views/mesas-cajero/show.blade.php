@@ -36,30 +36,29 @@
                             <button type="button" id="botoncomplementos" class="btn btn-warning m-2">Complementos</button>
                         </div>   
                         <div id="formplatos" class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <form action="">
-                                <div class="mb-3">
+                          <div>      
+                          <div class="mb-3">
                                     <label for="plato" class="form-label">Plato</label>
-                                    <select  class="form-select" name="plato" id="plato">
-                                      @foreach ($platillos as $platillo)
-                                      <option value="{{$platillo->id}}">{{$platillo->nombreplatillo}} - {{$platillo->tamanio}}</option>
-
-                                      @endforeach
+                                    <select  class="form-select" name="plato" id="nombreplato">
+                                      
+                                      <option id="optionplato" value="">  </option>
+                                     
                                     </select>
                                   </div>
                                   <div class="mb-3">
                                     <label for="cantidad" class="form-label">Cantidad</label>
-                                    <input type="number" class="form-control" id="cantidad" placeholder="Ingresar la Cantidad para este Pedido">
+                                    <input type="number" class="form-control" id="cantidadplato" placeholder="Ingresar la Cantidad para este Pedido">
                                   </div>
                                 
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            <button class="btn  btn-primary btn-lg">Agregar Plato</button>
-                        </form>
-                         </div>
+                            <button type="button" class="btn-close"  id="botoncerrar" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <button id="botonagregarplato" class="btn  btn-primary btn-lg">Agregar Plato</button>
+                          </div>    
+                          </div>
                          <div id="formbebidas" class="alert alert-warning alert-dismissible fade show" role="alert">
-                          <form action="" method="get">
-                              <div class="mb-3">
-                                  <label for="plato" class="form-label">Bebidas</label>
-                                  <select  class="form-select" name="plato" id="plato">
+                          <div>     
+                          <div class="mb-3">
+                                  <label for="bebida" class="form-label">Bebidas</label>
+                                  <select  class="form-select" name="bebida" id="nombrebebida">
                                     @foreach ($bebidas as $bebida)
                                     <option value="{{$bebida->id}}">{{$bebida->nombrebebida}} - {{$bebida->tamanio}}</option>
                                     @endforeach
@@ -68,15 +67,15 @@
                                 </div>
                                 <div class="mb-3">
                                   <label for="cantidad" class="form-label">Cantidad</label>
-                                  <input type="number" class="form-control" id="cantidad" placeholder="Ingresar la Cantidad para este Pedido">
+                                  <input type="number" class="form-control" id="cantidadbebida" placeholder="Ingresar la Cantidad para este Pedido">
                                 </div>
                               
-                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          <button type="button"  id="botoncerrar" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                           <button class="btn  btn-primary btn-lg">Agregar Bebida</button>
-                      </form>
-                       </div>
+                        </div>    
+                        </div>
                        <div id="formcomplementos" class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <form action="">
+                        <div>
                             <div class="mb-3">
                                 <label for="complemento" class="form-label">Complemento</label>
                                 <select  class="form-select" name="complemento" id="complemento">
@@ -90,9 +89,9 @@
                                 <input type="number" class="form-control" id="cantidad" placeholder="Ingresar la Cantidad para este Pedido">
                               </div>
                             
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" id="botoncerrar" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <button class="btn  btn-primary btn-lg">Agregar Complemento</button>
-                    </form>
+                        </div>
                      </div>
                     </article>
 
@@ -104,17 +103,17 @@
                                     <thead>
                                       <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Pedido</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Precio</th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <th id="idplato">1</th>
+                                        <td id="platotabla"></td>
+                                        <td id="cantidadtabla"></td>
+                                        <td id="preciotabla"></td>
                                       </tr>
                                       <tr>
                                         <th scope="row">2</th>
