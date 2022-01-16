@@ -39,15 +39,20 @@
                           <div>      
                           <div class="mb-3">
                                     <label for="plato" class="form-label">Plato</label>
-                                    <select  class="form-select" name="plato" id="nombreplato">
-                                      
-                                      <option id="optionplato" value="">  </option>
+                                    <select  class="form-select" name="plato" id="selectplato">
+                                      <option selected>Selecione un plato</option>
+                                     
                                      
                                     </select>
                                   </div>
+                                  <div >
+                                  <p id="idplato"></p>
+                                  <p id="precioplato">0.00</p>
+                                  
+                                  </div>
                                   <div class="mb-3">
                                     <label for="cantidad" class="form-label">Cantidad</label>
-                                    <input type="number" class="form-control" id="cantidadplato" placeholder="Ingresar la Cantidad para este Pedido">
+                                    <input type="number" value="1" class="form-control" id="cantidadplato" placeholder="Ingresar la Cantidad para este Pedido">
                                   </div>
                                 
                             <button type="button" class="btn-close"  id="botoncerrar" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -102,30 +107,22 @@
                                 <table class="table">
                                     <thead>
                                       <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">ID</th>
                                         <th scope="col">Pedido</th>
                                         <th scope="col">Cantidad</th>
                                         <th scope="col">Precio</th>
                                       </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tablaplatos">
+
                                       <tr>
-                                        <th id="idplato">1</th>
+                                        <th id="id">1</th>
                                         <td id="platotabla"></td>
                                         <td id="cantidadtabla"></td>
                                         <td id="preciotabla"></td>
                                       </tr>
-                                      <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">3</th>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@twitter</td>
-                                      </tr>
+                                     
+                                     
                                     </tbody>
                                   </table>
 
