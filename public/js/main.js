@@ -13,6 +13,10 @@ let formcomplementos = document.getElementById("formcomplementos");
 
 let botoncerrar = document.getElementsByClassName("btn-close");
 
+
+let botonagregarplato = document.getElementById("botonagregarplato");
+
+
 //console.log(botoncerrar);
 function cargarplatos(){
     let selectplato = document.getElementById("selectplato");
@@ -28,10 +32,22 @@ function cargarplatos(){
         selectplato.addEventListener("change", function(){
             let index = this.value;
             let precioplato = document.getElementById("precioplato");
-            precioplato.innerText = data.platillos[index].precio;   
-
             let idplato = document.getElementById("idplato");
-               idplato.innerText = data.platillos[index].id;
+            let cantidadplato = document.getElementById("cantidadplato");
+
+            
+            if (index=='def') {
+                botonagregarplato.disabled=true;
+            }
+            else
+            {
+                botonagregarplato.disabled=false;
+            }
+             precioplato.innerText = data.platillos[index].precio;   
+             idplato.innerText = data.platillos[index].id;
+             cantidadplato.value=1;
+        
+               
         });
       //  data.platillos[0].nombreplatillo + " - " + data.platillos[0].tamanio;
        
@@ -74,13 +90,12 @@ botoncerrar[2].addEventListener("click", cerrarformulario);
 
 //AGREGAR PEDIDOS
 
-
-let botonagregarplato = document.getElementById("botonagregarplato");
 let tablaplatos = document.getElementById("tablaplatos");
 let platotabla = document.getElementById("platotabla");
 let cantidadtabla= document.getElementById("cantidadtabla");
 let preciotabla= document.getElementById("preciotabla");
 
+let indextabla =0;
 function agregarplato(){
     
     let nombreplato = document.getElementById("selectplato");
@@ -88,18 +103,34 @@ function agregarplato(){
     let precioplato = document.getElementById("precioplato");
     let idplato = document.getElementById("idplato");
     let platoseleccionado = nombreplato.options[nombreplato.selectedIndex];
-    let cantidad = cantidadplato;   
+    let cantidad = cantidadplato.value;   
     let precio= precioplato.textContent;
     
-    tablaplatos.innerHTML += "<tr>"+ 
+    let subtotal = cantidad * precio;
+    indextabla = indextabla + 1;
+
+    if (cantidad <= 0 ) {
+            let alertacantidad = document.getElementById("alertacantidad");
+            alertacantidad.style.display="flex";
+    } else {
+        
+   
+
+    tablaplatos.innerHTML += "<tr id='"+ indextabla +"'>"+ 
                 "<th>"+ idplato.textContent +"</td>"+
                 "<td>"+ platoseleccionado.text +"</td>"+
-                "<td>"+ cantidad.value +"</td>"+
-                "<td>"+ precio +"</td>"+   
+                "<td>"+ cantidad +"</td>"+
+                "<td>"+ precio +" </td>"+
+                "<td>"+ subtotal+"</td>"+   
+                "<td>"+
+                
+                "<div class='btn-group' role='group'>"+
+                "<button type='button' class='btn btn-danger'>DEL</button>"+
+                "</div>"+
+
+                "</td>"+
     "</tr>";
-    
-    
-  
+    }
     
    /* platotabla.innerText += platoseleccionado.text;
     cantidadtabla.innerText += cantidad.value;

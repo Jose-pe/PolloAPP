@@ -39,9 +39,8 @@
                           <div>      
                           <div class="mb-3">
                                     <label for="plato" class="form-label">Plato</label>
-                                    <select  class="form-select" name="plato" id="selectplato">
-                                      <option selected>Selecione un plato</option>
-                                     
+                                    <select  class="form-select" name="plato" required id="selectplato">
+                                      <option value="def"  selected>Selecione un plato</option>                                   
                                      
                                     </select>
                                   </div>
@@ -52,11 +51,14 @@
                                   </div>
                                   <div class="mb-3">
                                     <label for="cantidad" class="form-label">Cantidad</label>
-                                    <input type="number" value="1" class="form-control" id="cantidadplato" placeholder="Ingresar la Cantidad para este Pedido">
+                                    <input type="number" required min="1" max="500" value="1" class="form-control" id="cantidadplato" placeholder="Ingresar la Cantidad para este Pedido">
+                                    <div id="alertacantidad" class="alert alert-danger" role="alert">
+                                       La cantidad del pedido tiene que ser mayor a 0
+                                    </div>
                                   </div>
                                 
                             <button type="button" class="btn-close"  id="botoncerrar" data-bs-dismiss="alert" aria-label="Close"></button>
-                            <button id="botonagregarplato" class="btn  btn-primary btn-lg">Agregar Plato</button>
+                            <button id="botonagregarplato" disabled class="btn btn-primary btn-lg">Agregar Plato</button>
                           </div>    
                           </div>
                          <div id="formbebidas" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -110,17 +112,14 @@
                                         <th scope="col">ID</th>
                                         <th scope="col">Pedido</th>
                                         <th scope="col">Cantidad</th>
-                                        <th scope="col">Precio</th>
+                                        <th scope="col">Precio Unit.</th>
+                                        <th scope="col">SubTotal</th>
+                                        <th scope="col">Acciones</th>
                                       </tr>
                                     </thead>
                                     <tbody id="tablaplatos">
 
-                                      <tr>
-                                        <th id="id">1</th>
-                                        <td id="platotabla"></td>
-                                        <td id="cantidadtabla"></td>
-                                        <td id="preciotabla"></td>
-                                      </tr>
+                                     
                                      
                                      
                                     </tbody>
