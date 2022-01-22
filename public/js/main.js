@@ -15,9 +15,46 @@ let botoncerrar = document.getElementsByClassName("btn-close");
 
 
 let botonagregarplato = document.getElementById("botonagregarplato");
-
+let botonagregarbebida= document.getElementById("botonagregarbebida");
 
 //console.log(botoncerrar);
+function cargarbebidas() {
+    let selectbebida = document.getElementById('selectbebida');
+    fetch('http://polloapp.in/bebidasjson')
+    .then(response => response.json())
+    .then(databebidas =>{
+        console.log(databebidas.bebidas);
+
+        for (let index = 0; index <= databebidas.bebidas.length-1; index++) {
+        
+            selectbebida. innerHTML += '<option class="" value="'+ index +'">'+ databebidas.bebidas[index].nombrebebida+ " - " + databebidas.bebidas[index].tamanio + '</option>';
+        }
+
+        selectbebida.addEventListener("change", function() {
+            let index= this.value;
+            let preciobebida= document.getElementById('preciobebida');
+            let idbebida= document.getElementById('idbebida');
+            let cantidadbebida=document.getElementById('cantidadbebida');
+
+            if (index=='def') {
+                 botonagregarbebida.disabled=true;    
+            }
+            else{
+                botonagregarbebida.disabled=false;
+            }
+            preciobebida.innerText =databebidas.bebidas[index].precio;
+            idbebida.innerText = databebidas.bebidas[index].id;
+            cantidadbebida.value=1;
+
+        });
+
+
+
+    });
+
+  
+}
+
 function cargarplatos(){
     let selectplato = document.getElementById("selectplato");
     fetch('http://polloapp.in/platillosjson')
@@ -55,6 +92,7 @@ function cargarplatos(){
 }
 
 cargarplatos();
+cargarbebidas();
 
 //logica de la interfaz - botones de platos - bebidas - complementos
 function mostrarplatos(){
@@ -96,6 +134,12 @@ let cantidadtabla= document.getElementById("cantidadtabla");
 let preciotabla= document.getElementById("preciotabla");
 
 let indextabla =0;
+
+function borrardetallepedido(indextabla) {
+    let indexpedido = document.getElementById(indextabla);         
+    indexpedido.replaceWith(" ");
+          console.log(indextabla);
+  }
 function agregarplato(){
     
     let nombreplato = document.getElementById("selectplato");
@@ -109,13 +153,15 @@ function agregarplato(){
     let subtotal = cantidad * precio;
     indextabla = indextabla + 1;
 
+   
+   
+
     if (cantidad <= 0 ) {
             let alertacantidad = document.getElementById("alertacantidad");
             alertacantidad.style.display="flex";
     } else {
         
-   
-
+        
     tablaplatos.innerHTML += "<tr id='"+ indextabla +"'>"+ 
                 "<th>"+ idplato.textContent +"</td>"+
                 "<td>"+ platoseleccionado.text +"</td>"+
@@ -125,12 +171,16 @@ function agregarplato(){
                 "<td>"+
                 
                 "<div class='btn-group' role='group'>"+
-                "<button type='button' class='btn btn-danger'>DEL</button>"+
+                "<button type='button' onclick='borrardetallepedido("+ indextabla +")' class='borrardetalle btn btn-danger'>DEL</button>"+
                 "</div>"+
-
+              
+        
                 "</td>"+
     "</tr>";
+   
     }
+    
+    
     
    /* platotabla.innerText += platoseleccionado.text;
     cantidadtabla.innerText += cantidad.value;
@@ -138,6 +188,46 @@ function agregarplato(){
 }
 
 botonagregarplato.addEventListener("click", agregarplato);
+
+//AGREGAR BEBIDAS
+function agregarbebida() {
+    
+    let nombrebebida = document.getElementById("selectbebida");
+    let cantidadbebida = document.getElementById("cantidadbebida");
+    let preciobebida = document.getElementById("preciobebida");
+    let idbebida = document.getElementById("idbebida");
+
+    let bebidaseleccionada = nombrebebida.options[nombrebebida.selectedIndex];
+    let cantidad = cantidadbebida.value;
+    let precio = preciobebida.textContent;
+
+    let subtotal = cantidad * precio;
+    indextabla = indextabla + 1;
+
+    if (cantidad <= 0 ) {
+        
+    }
+    else{
+
+        tablaplatos.innerHTML +=  "<tr id='"+ indextabla +"'>"+ 
+                    "<th>"+ idbebida.textContent +"</td>"+
+                    "<td>"+ bebidaseleccionada.text +"</td>"+
+                    "<td>"+ cantidad +"</td>"+
+                    "<td>"+ precio +" </td>"+
+                    "<td>"+ subtotal+"</td>"+   
+                    "<td>"+
+        
+                    "<div class='btn-group' role='group'>"+
+                    "<button type='button' onclick='borrardetallepedido("+ indextabla +")' class='borrardetalle btn btn-danger'>DEL</button>"+
+                    "</div>"+     
+
+                   "</td>"+
+            "</tr>";
+    }
+
+}
+
+botonagregarbebida.addEventListener("click", agregarbebida);
 
 
 

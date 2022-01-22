@@ -20,6 +20,7 @@ Route::resource('complemento', App\Http\Controllers\ComplementoController::class
 
 Route::get('mesascajero',[App\Http\Controllers\MesaController::class, 'mostrarmesas'])->name('mesascajero');
 Route::get('platillosjson',[App\Http\Controllers\PlatilloController::class, 'platillosjson'])->name('platillosjson');
+route::get('bebidasjson',[App\Http\Controllers\BebidaController::class, 'bebidasjson'])->name('bebidasjson');
 Route::get('/', function () {
     return view('welcome');
 })->name('inicio');

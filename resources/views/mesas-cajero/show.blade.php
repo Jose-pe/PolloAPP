@@ -65,12 +65,16 @@
                           <div>     
                           <div class="mb-3">
                                   <label for="bebida" class="form-label">Bebidas</label>
-                                  <select  class="form-select" name="bebida" id="nombrebebida">
-                                    @foreach ($bebidas as $bebida)
-                                    <option value="{{$bebida->id}}">{{$bebida->nombrebebida}} - {{$bebida->tamanio}}</option>
-                                    @endforeach
+                                  <select  class="form-select" name="bebida" id="selectbebida">
+                                   
+                                    <option selected value="def">Seleccione una Bebida</option>
+                                  
                                      
                                   </select>
+                                </div>
+                                <div>
+                                  <p id="idbebida"></p>
+                                  <p id="preciobebida"></p>                                  
                                 </div>
                                 <div class="mb-3">
                                   <label for="cantidad" class="form-label">Cantidad</label>
@@ -78,17 +82,17 @@
                                 </div>
                               
                           <button type="button"  id="botoncerrar" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                          <button class="btn  btn-primary btn-lg">Agregar Bebida</button>
+                          <button id="botonagregarbebida" disabled class="btn  btn-primary btn-lg">Agregar Bebida</button>
                         </div>    
                         </div>
                        <div id="formcomplementos" class="alert alert-warning alert-dismissible fade show" role="alert">
                         <div>
                             <div class="mb-3">
                                 <label for="complemento" class="form-label">Complemento</label>
-                                <select  class="form-select" name="complemento" id="complemento">
-                                  @foreach ($complementos as $complemento)
-                                  <option value="{{$complemento->id}}">{{$complemento->nombrecomplemento}} - {{$complemento->tamanio}}</option>
-                                  @endforeach
+                                <select  class="form-select" name="complemento" id="selectcomplemento">
+                                  
+                                  <option value="def">Seleccione un Complemento</option>
+                                
                                 </select>
                               </div>
                               <div class="mb-3">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bebida;
 use Illuminate\Http\Request;
+use Response;
 
 class BebidaController extends Controller
 {
@@ -99,10 +100,12 @@ class BebidaController extends Controller
         return redirect()->route('bebida.index')->with('status','Se ha eliminado una bebida');
 
     }
-    public function mostrarbebida()
+    public function bebidasjson()
     {
        $bebidas = Bebida::all();
-       return view('mesas-cajero.show', compact('bebidas'));
-
+       return Response::json(
+           array('success'=>true,
+                  'bebidas' => $bebidas  
+           ),200 );
     }
 }
