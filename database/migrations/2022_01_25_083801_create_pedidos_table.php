@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComplementosTable extends Migration
+class CreatePedidosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateComplementosTable extends Migration
      */
     public function up()
     {
-        Schema::create('complementos', function (Blueprint $table) {
+        Schema::create('pedidos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
-            $table->string('nombrecomplemento');
-            $table->string('tamanio');
-            $table->double('precio', 8,2);
+            $table->id();           
+            $table->date('fecha');
+            $table->double('totalapagar');
+            $table->boolean('estado')->default(0);
+            $table->bigInteger('idmesa')->unsigned();
             $table->timestamps();
+
+            $table->foreign('idmesa')->references('id')->on('mesas');
         });
     }
 
@@ -30,6 +33,6 @@ class CreateComplementosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('complementos');
+        Schema::dropIfExists('pedidos');
     }
 }

@@ -4,15 +4,65 @@
     <section class="container">
 
             <div class="row mt-5">
-                <h2 class="text-success">{{$mesa->nromesa}}</h2>   
+                <h2 class="text-success">{{$mesa->nromesa}}</h2>     
+                
                 <article class="col">
                     @if ($mesa->estado == 0)
                     <p class="badge bg-danger"> Ocupado </p>
                     @else  
                     <p class="badge bg-success">Libre </p>  
                     @endif
-                   
+                  <div class="row">
+                    @foreach ($mesa->pedidos as $pedido)
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                      <div class="card-header"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" >{{$pedido->id}}</strong></div>
+                      <div class="card-body">
+                        <p class="card-text">{{$pedido->fecha}} </p>  
+                        @if ($pedido->estado == 0)
+                        <span class="badge rounded-pill bg-warning text-dark mb-2 p-2">En Espera</span>
+                        @else                            
+                        <span class="badge rounded-pill bg-primary mb-2 p-2">Atendido</span>     
+                        @endif                                             
+                        @foreach ($pedido->detallepedidos as $detalle)                          
+                        <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;"> 
+                                                
+                          @if ($detalle->idplatillo==null)
+                           
+                          @else
+                          <p class="m-1 p-1">{{$detalle->platillos['nombreplatillo']}}</p>
+                          <p class="m-1 p-1"> <strong>Tamaño: </strong> {{$detalle->platillos['tamanio']}}</p>
+
+                          @endif
+                         
+                          @if ($detalle->idbebida==null)
+                            
+                          @else
+                          <p class="m-1 p-1">{{$detalle->bebidas['nombrebebida']}}</p>
+                          <p class="m-1 p-1"><strong>Tamaño: </strong> {{$detalle->bebidas['tamanio']}}</p> 
+                          @endif
+                          
+                          @if ($detalle->idcomplemento == null)
+                              
+                          @else
+                          <p class="m-1 p-1">{{$detalle->complementos['nombrecomplemento']}}</p>
+                          <p class="m-1 p-1">{{$detalle->complementos['tamanio']}}</p> 
+                          @endif     
+                          <p class="m-1 p-1"> <strong> Cant: </strong> {{$detalle->cantidad}}</p>  
+
+                        </div>                   
+                         
+                                                            
+                        @endforeach   
+                                       
+                      </div>
+                      <hr>
+                      <h5 class="card-title"> <strong> Precio:</strong> {{$pedido->totalapagar}} <strong> s/. </strong> </h5>
+                    @endforeach
+                      
+                  </div>
                     <p>{{$mesa->nrosillas}}</p>
+                  
+               
                 </article>
                 <article class="col mt-5">
                     <div class="btn-group mt-4">
@@ -52,12 +102,14 @@
                                   <div class="mb-3">
                                     <label for="cantidad" class="form-label">Cantidad</label>
                                     <input type="number" required min="1" max="500" value="1" class="form-control" id="cantidadplato" placeholder="Ingresar la Cantidad para este Pedido">
-                                    <div id="alertacantidad" class="alert alert-danger" role="alert">
-                                       La cantidad del pedido tiene que ser mayor a 0
+                                    <div class="alerta alert alert-danger" role="alert">
+                                       <p class="p-2">La cantidad del pedido tiene que ser mayor a 0</p>
+                                       <button type="button"  class="botoncerraralerta btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+
                                     </div>
                                   </div>
                                 
-                            <button type="button" class="btn-close"  id="botoncerrar" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <button type="button" class="botoncerrar btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             <button id="botonagregarplato" disabled class="btn btn-primary btn-lg">Agregar Plato</button>
                           </div>    
                           </div>
@@ -79,9 +131,14 @@
                                 <div class="mb-3">
                                   <label for="cantidad" class="form-label">Cantidad</label>
                                   <input type="number" class="form-control" id="cantidadbebida" placeholder="Ingresar la Cantidad para este Pedido">
+                                  <div  class="alerta alert alert-danger" role="alert">
+                                    <p class="p-2"> La cantidad del pedido tiene que ser mayor a 0 </p>
+                                    <button type="button"   class="botoncerraralerta btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                                 </div>
                                 </div>
                               
-                          <button type="button"  id="botoncerrar" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          <button type="button"  class="botoncerrar btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                           <button id="botonagregarbebida" disabled class="btn  btn-primary btn-lg">Agregar Bebida</button>
                         </div>    
                         </div>
@@ -95,13 +152,22 @@
                                 
                                 </select>
                               </div>
+                              <div>
+                                <p id="idcomplemento"></p>
+                                <p id="preciocomplemento"></p>
+                              </div>
                               <div class="mb-3">
                                 <label for="cantidad" class="form-label">Cantidad</label>
-                                <input type="number" class="form-control" id="cantidad" placeholder="Ingresar la Cantidad para este Pedido">
+                                <input type="number" class="form-control" id="cantidadcomplemento" placeholder="Ingresar la Cantidad para este Pedido">
                               </div>
+                              <div class="alerta alert alert-danger" role="alert">
+                                <p class="p-2">La cantidad del pedido tiene que ser mayor a 0</p>
+                                <button type="button"  class="botoncerraralerta btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                             </div>
                             
-                        <button type="button" id="botoncerrar" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <button class="btn  btn-primary btn-lg">Agregar Complemento</button>
+                        <button type="button"  class="botoncerrar btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button id="botonagregarcomplemento" disabled class="btn  btn-primary btn-lg">Agregar Complemento</button>
                         </div>
                      </div>
                     </article>

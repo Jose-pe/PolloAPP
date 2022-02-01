@@ -11,13 +11,47 @@ let formbebidas = document.getElementById("formbebidas");
 let botoncomplementos = document.getElementById("botoncomplementos");
 let formcomplementos = document.getElementById("formcomplementos");
 
-let botoncerrar = document.getElementsByClassName("btn-close");
+let botoncerrar = document.getElementsByClassName("botoncerrar");
+let botoncerraralerta = document.getElementsByClassName("botoncerraralerta");
 
 
 let botonagregarplato = document.getElementById("botonagregarplato");
 let botonagregarbebida= document.getElementById("botonagregarbebida");
+let botonagregarcomplemento = document.getElementById("botonagregarcomplemento");
 
 //console.log(botoncerrar);
+function cargarcomplementos() {
+      let selectcomplemento = document.getElementById('selectcomplemento');
+      fetch('http://polloapp.in/complementosjson')
+      .then(response => response.json())
+      .then(datacomplementos =>{
+
+            console.log(datacomplementos.complementos);
+          for (let index = 0; index <= datacomplementos.complementos.length-1; index++) {
+
+            selectcomplemento.innerHTML += '<option class="" value="'+ index +'">'+ datacomplementos.complementos[index].nombrecomplemento + " - " + datacomplementos.complementos[index].tamanio + '</option>';
+         }  
+         selectcomplemento.addEventListener("change", function(){
+            let index = this.value;
+            let preciocomplemento = document.getElementById('preciocomplemento');
+            let idcomplemento= document.getElementById('idcomplemento');
+            let cantidadcomplemento = document.getElementById('cantidadcomplemento');
+
+            if (index =="def") {
+                botonagregarcomplemento.disabled=true;
+            }
+            else{
+                botonagregarcomplemento.disabled=false;
+            }
+            preciocomplemento.innerText=datacomplementos.complementos[index].precio;
+            idcomplemento.innerText= datacomplementos.complementos[index].id;
+            cantidadcomplemento.value = 1;
+         });
+
+         
+      });  
+}
+
 function cargarbebidas() {
     let selectbebida = document.getElementById('selectbebida');
     fetch('http://polloapp.in/bebidasjson')
@@ -93,6 +127,7 @@ function cargarplatos(){
 
 cargarplatos();
 cargarbebidas();
+cargarcomplementos();
 
 //logica de la interfaz - botones de platos - bebidas - complementos
 function mostrarplatos(){
@@ -117,6 +152,13 @@ function cerrarformulario(){
     formbebidas.style.display="none";
     formcomplementos.style.display="none";
 }
+function  cerraralerta(){
+    
+    let alerta = document.getElementsByClassName("alerta");
+    alerta[0].style.display = "none";
+    alerta[1].style.display = "none";
+    alerta[2].style.display = "none";
+}
 
 
 botonplatos.addEventListener("click", mostrarplatos);
@@ -125,7 +167,9 @@ botoncomplementos.addEventListener("click", mostrarcomplementos);
 botoncerrar[0].addEventListener("click", cerrarformulario);
 botoncerrar[1].addEventListener("click", cerrarformulario);
 botoncerrar[2].addEventListener("click", cerrarformulario);
-
+botoncerraralerta[0].addEventListener("click", cerraralerta);
+botoncerraralerta[1].addEventListener("click", cerraralerta);
+botoncerraralerta[2].addEventListener("click", cerraralerta);
 //AGREGAR PEDIDOS
 
 let tablaplatos = document.getElementById("tablaplatos");
@@ -157,8 +201,8 @@ function agregarplato(){
    
 
     if (cantidad <= 0 ) {
-            let alertacantidad = document.getElementById("alertacantidad");
-            alertacantidad.style.display="flex";
+            let alertacantidad = document.getElementsByClassName("alerta");
+            alertacantidad[0].style.display="flex";
     } else {
         
         
@@ -205,7 +249,8 @@ function agregarbebida() {
     indextabla = indextabla + 1;
 
     if (cantidad <= 0 ) {
-        
+        let alertacantidadbebida = document.getElementsByClassName("alerta");
+            alertacantidadbebida[1].style.display="flex";
     }
     else{
 
@@ -230,4 +275,41 @@ function agregarbebida() {
 botonagregarbebida.addEventListener("click", agregarbebida);
 
 
+//Agregar Complementos
+function agregarcomplemento(){
 
+    let nombrecomplemento = document.getElementById("selectcomplemento");
+    let cantidadcomplemento= document.getElementById("cantidadcomplemento");
+    let preciocomplemento= document.getElementById("preciocomplemento");
+    let idcomplemento = document.getElementById("idcomplemento");
+
+    let complementoseleccionado = nombrecomplemento.options[nombrecomplemento.selectedIndex];
+    let cantidad = cantidadcomplemento.value;
+    let precio = preciocomplemento.textContent;
+
+    let subtotal = cantidad * precio;
+    indextabla = indextabla + 1;
+    if (cantidad <= 0 ) {
+        let alertacantidadcomplemento = document.getElementsByClassName("alerta");
+            alertacantidadcomplemento[2].style.display="flex";
+    }
+    else{
+        tablaplatos.innerHTML += "<tr id='"+ indextabla +"'>"+ 
+                        "<th>"+ idcomplemento.textContent +"</td>"+
+                        "<td>"+ complementoseleccionado.text +"</td>"+
+                        "<td>"+ cantidad +"</td>"+
+                        "<td>"+ precio +" </td>"+
+                        "<td>"+ subtotal+"</td>"+   
+            "<td>"+
+
+                    "<div class='btn-group' role='group'>"+
+                    "<button type='button' onclick='borrardetallepedido("+ indextabla +")' class='borrardetalle btn btn-danger'>DEL</button>"+
+                    "</div>"+     
+
+            "</td>"+
+"</tr>";
+
+    }
+}
+
+botonagregarcomplemento.addEventListener("click", agregarcomplemento);

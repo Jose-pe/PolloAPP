@@ -14,6 +14,7 @@ class CreatePlatillosTable extends Migration
     public function up()
     {
         Schema::create('platillos', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('nombreplatillo');
             $table->string('tamanio');

@@ -13,5 +13,8 @@ class Bebida extends Model
         'tamanio',
         'precio',
     ];
+    public function detallepedidos(){
+        return $this->hasMany(DetallePedido::class, 'idbebida', 'id');
+    }
     
 }

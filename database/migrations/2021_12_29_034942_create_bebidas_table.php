@@ -14,6 +14,7 @@ class CreateBebidasTable extends Migration
     public function up()
     {
         Schema::create('bebidas', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('nombrebebida');
             $table->string('tamanio');

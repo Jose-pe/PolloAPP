@@ -1,6 +1,6 @@
 #formplatos, #formbebidas, #formcomplementos{
     display: none;    
 }
-#alertacantidad{
+.alerta, #alertacantidadbebida{
     display: none;
 }

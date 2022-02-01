@@ -13,4 +13,8 @@ class Complemento extends Model
         'tamanio',
         'precio',
     ];
+    public function detallepedidos(){
+        return $this->hasMany(DetallePedido::class, 'idcomplemento', 'id');
+    }
+
 }

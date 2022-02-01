@@ -15,5 +15,7 @@ class Platillo extends Model
         'precio',
 
     ];
-
+    public function detallepedidos(){
+        return $this->hasMany(DetallePedido::class, 'idplatillo', 'id');
+    }
 }

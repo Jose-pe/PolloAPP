@@ -13,4 +13,8 @@ class Mesa extends Model
         'nrosillas',
         'estado',
     ];
+
+  public function pedidos(){
+      return $this->hasMany(Pedido::class, 'idmesa','id');
+  }  
 }

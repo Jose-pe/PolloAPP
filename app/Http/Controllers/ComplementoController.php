@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Complemento;
 use Illuminate\Http\Request;
+use Response;
 
 class ComplementoController extends Controller
 {
@@ -97,5 +98,13 @@ class ComplementoController extends Controller
         $complemento = Complemento::find($id);
         $complemento->delete();
         return redirect()->route('complemento.index')->with('status', 'Se ah eliminado un complemento');
+    }
+    public function complementosjson(){
+        $complementos = Complemento::all();
+        return Response::json(
+            array('success'=> true,
+                  'complementos' => $complementos
+            ),200);
+
     }
 }
