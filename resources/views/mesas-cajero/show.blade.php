@@ -3,88 +3,96 @@
 
     <section class="container">
 
-            <div class="row mt-5">
-                <h2 class="text-success">{{$mesa->nromesa}}</h2>     
-                
-                <article class="col">
-                    @if ($mesa->estado == 0)
-                    <p class="badge bg-danger"> Ocupado </p>
-                    @else  
-                    <p class="badge bg-success">Libre </p>  
-                    @endif
-                  <div class="row">
-                    @foreach ($mesa->pedidos as $pedido)
-                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-                      <div class="card-header"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" >{{$pedido->id}}</strong></div>
-                      <div class="card-body">
-                        <p class="card-text">{{$pedido->fecha}} </p>  
-                        @if ($pedido->estado == 0)
-                        <span class="badge rounded-pill bg-warning text-dark mb-2 p-2">En Espera</span>
-                        @else                            
-                        <span class="badge rounded-pill bg-primary mb-2 p-2">Atendido</span>     
-                        @endif                                             
-                        @foreach ($pedido->detallepedidos as $detalle)                          
-                        <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;"> 
-                                                
-                          @if ($detalle->idplatillo==null)
-                           
-                          @else
-                          <p class="m-1 p-1">{{$detalle->platillos['nombreplatillo']}}</p>
-                          <p class="m-1 p-1"> <strong>Tamaño: </strong> {{$detalle->platillos['tamanio']}}</p>
-
-                          @endif
-                         
-                          @if ($detalle->idbebida==null)
-                            
-                          @else
-                          <p class="m-1 p-1">{{$detalle->bebidas['nombrebebida']}}</p>
-                          <p class="m-1 p-1"><strong>Tamaño: </strong> {{$detalle->bebidas['tamanio']}}</p> 
-                          @endif
-                          
-                          @if ($detalle->idcomplemento == null)
-                              
-                          @else
-                          <p class="m-1 p-1">{{$detalle->complementos['nombrecomplemento']}}</p>
-                          <p class="m-1 p-1">{{$detalle->complementos['tamanio']}}</p> 
-                          @endif     
-                          <p class="m-1 p-1"> <strong> Cant: </strong> {{$detalle->cantidad}}</p>  
-
-                        </div>                   
-                         
-                                                            
-                        @endforeach   
-                                       
-                      </div>
-                      <hr>
-                      <h5 class="card-title"> <strong> Precio:</strong> {{$pedido->totalapagar}} <strong> s/. </strong> </h5>
-                    @endforeach
-                      
-                  </div>
-                    <p>{{$mesa->nrosillas}}</p>
-                  
+          <div class="row mt-5">
+            <div class="col">
+              <div>
+                <h2 class="text-success">{{$mesa->nromesa}}</h2>    
+                @if ($mesa->estado == 0)
+                <p class="badge bg-danger"> Ocupado </p>
+                @else  
+                <p class="badge bg-success">Libre </p>  
+                @endif
+                <p class="badge bg-success">{{date('Y-m-d')}}</p>
+                <p>{{$mesa->nrosillas}}</p> 
+                <p>{{$mesa->id}}</p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="btn-group mt-4">
                
-                </article>
-                <article class="col mt-5">
-                    <div class="btn-group mt-4">
-                        @if ($mesa->estado == 0)
-                        <button type="button" class="btn btn-success m-2" disabled>Atender Mesa</button>
-                        <button type="button" class="btn btn-danger m-2" disabled>Cancelar Atencion</button>
+                <button type="button" id="botonatendermesa" class="btn btn-success m-2" >Atender Mesa</button>
+                <button type="button" id="botoncancelarpedido" class="btn btn-danger m-2" disabled>Cancelar Atencion</button>
 
-                        @else
-                        <button type="button" class="btn btn-success m-2">Atender Mesa</button>
-                        <button type="button" class="btn btn-danger m-2">Cancelar Atencion</button>
+               
 
-                        @endif
-                        <button type="button" class="btn btn-success m-2">Cobrar Mesa</button>
-                    </div>
-                </article>
+            </div>
+            </div>
+          </div>
+          <div class="row">
+            @foreach ($mesa->pedidos as $pedido)                  
+
+            <div class="card text-white bg-success m-2" style="max-width: 18rem;">
+              <div class="card-header"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" >{{$pedido->id}}</strong></div>
+              <div class="card-body">
+                <p class="card-text">{{$pedido->fecha}} </p>  
+                @if ($pedido->estado == 0)
+                <span class="badge rounded-pill bg-warning text-dark mb-2 p-2">En Espera</span>
+                @else                            
+                <span class="badge rounded-pill bg-primary mb-2 p-2">Atendido</span>     
+                @endif                                             
+                @foreach ($pedido->detallepedidos as $detalle)                          
+                <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;"> 
+                                    
+                  @if ($detalle->idplatillo==null)
+                   
+                  @else
+                  <p class="m-1 p-1">{{$detalle->platillos['nombreplatillo']}}</p>
+                  <p class="m-1 p-1"> <strong>Tamaño: </strong> {{$detalle->platillos['tamanio']}}</p>
+
+                  @endif
+                 
+                  @if ($detalle->idbebida==null)
+                    
+                  @else
+                  <p class="m-1 p-1">{{$detalle->bebidas['nombrebebida']}}</p>
+                  <p class="m-1 p-1"><strong>Tamaño: </strong> {{$detalle->bebidas['tamanio']}}</p> 
+                  @endif
+                  
+                  @if ($detalle->idcomplemento == null)
+                      
+                  @else
+                  <p class="m-1 p-1">{{$detalle->complementos['nombrecomplemento']}}</p>
+                  <p class="m-1 p-1">{{$detalle->complementos['tamanio']}}</p> 
+                  @endif     
+                  <p class="m-1 p-1"> <strong> Cant: </strong> {{$detalle->cantidad}}</p>  
+
+                </div>                   
+                 
+                                                    
+                @endforeach   
+                               
+              </div>
+              <hr>
+              <h5 class="card-title"> <strong> Precio:</strong> {{$pedido->totalapagar}} <strong> s/. </strong> </h5>
+              
+              
+          </div>
+          @endforeach
+            
+          </div>
+
+
+            <div class="row mt-5">               
+               
                 <section  class="row">
-                    <article class="col">
-                        <div class="btn-group">
-                            <button type="button" id="botonplatos" class="btn btn-warning m-2">Platos</button>
-                            <button type="button" id="botonbebidas" class="btn btn-warning m-2">Bebidas</button>
-                            <button type="button" id="botoncomplementos" class="btn btn-warning m-2">Complementos</button>
-                        </div>   
+                  <section class="col" id="botonesplatos">
+                  <div class="btn-group" id="botonesproductos">
+                    <button type="button" id="botonplatos" class="btn btn-warning m-2">Platos</button>
+                    <button type="button" id="botonbebidas" class="btn btn-warning m-2">Bebidas</button>
+                    <button type="button" id="botoncomplementos" class="btn btn-warning m-2">Complementos</button>
+                  </div>  
+                  </section>
+                    <article class="row">                         
                         <div id="formplatos" class="alert alert-warning alert-dismissible fade show" role="alert">
                           <div>      
                           <div class="mb-3">
@@ -172,7 +180,7 @@
                      </div>
                     </article>
 
-                    <div class="row mt-5">
+                    <div class="row mt-5" id="seccionpedidos">
                             <h2> Lista de Pedidos para la <span class="badge bg-success">{{$mesa->nromesa}}</span></h2> 
 
                             <div class="col mt-5">

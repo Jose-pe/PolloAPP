@@ -19,10 +19,13 @@ let botonagregarplato = document.getElementById("botonagregarplato");
 let botonagregarbebida= document.getElementById("botonagregarbebida");
 let botonagregarcomplemento = document.getElementById("botonagregarcomplemento");
 
+let botonatendermesa = document.getElementById("botonatendermesa");
+let botoncancelarpedido= document.getElementById("botoncancelarpedido");
+
 //console.log(botoncerrar);
 function cargarcomplementos() {
       let selectcomplemento = document.getElementById('selectcomplemento');
-      fetch('http://polloapp.in/complementosjson')
+      fetch('/complementosjson')
       .then(response => response.json())
       .then(datacomplementos =>{
 
@@ -54,7 +57,7 @@ function cargarcomplementos() {
 
 function cargarbebidas() {
     let selectbebida = document.getElementById('selectbebida');
-    fetch('http://polloapp.in/bebidasjson')
+    fetch('/bebidasjson')
     .then(response => response.json())
     .then(databebidas =>{
         console.log(databebidas.bebidas);
@@ -91,7 +94,7 @@ function cargarbebidas() {
 
 function cargarplatos(){
     let selectplato = document.getElementById("selectplato");
-    fetch('http://polloapp.in/platillosjson')
+    fetch('/platillosjson')
     .then(response => response.json())
     .then(data => {
         console.log(data.platillos);
@@ -313,3 +316,57 @@ function agregarcomplemento(){
 }
 
 botonagregarcomplemento.addEventListener("click", agregarcomplemento);
+
+function crearpedido(){
+
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    fetch("http://polloapp.in/pedidostore",{
+
+                headers:{
+                    "Content-Type":"application/json",
+                    "Accept": "application/json, text-plain, */*",
+                    "X-Requested-Whith":"XMLHttpRequest", 
+                    "X-CSRF-TOKEN":token
+                },
+                method:"post",
+                credentials:"same-origin",
+                body: JSON.stringify({
+                    fecha: '2022/02/03',
+                    totalapagar: '50',
+                    estado: '0',
+                    idmesa:'2'
+                })
+    })
+    .then((data)=>{
+        console.log("pedidoguardado")
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+}
+
+function atendermesa(){
+
+    let botonesproductos = document.getElementById('botonesproductos');
+    let seccionpedidos = document.getElementById('seccionpedidos');
+    
+    seccionpedidos.style.display= "flex";
+    botonesproductos.style.display="flex";
+    botonatendermesa.disabled=true;
+    botoncancelarpedido.disabled= false;
+    
+}
+
+botonatendermesa.addEventListener("click", atendermesa);
+
+function cancelarpedido(){
+    let botonesproductos = document.getElementById('botonesproductos');
+    let seccionpedidos = document.getElementById('seccionpedidos');
+    
+    seccionpedidos.style.display= "none";
+    botonesproductos.style.display="none";
+    botonatendermesa.disabled=false;
+    botoncancelarpedido.disabled= true;
+}
+
+botoncancelarpedido.addEventListener("click", cancelarpedido);

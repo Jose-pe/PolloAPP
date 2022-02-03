@@ -4,3 +4,9 @@
 .alerta, #alertacantidadbebida{
     display: none;
 }
+#seccionpedidos, #botonesproductos{
+    display: none;    
+}
+#botonesplatos{
+    max-width: 25rem;
+}

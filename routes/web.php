@@ -21,7 +21,8 @@ Route::resource('complemento', App\Http\Controllers\ComplementoController::class
 Route::get('mesascajero',[App\Http\Controllers\MesaController::class, 'mostrarmesas'])->name('mesascajero');
 Route::get('platillosjson',[App\Http\Controllers\PlatilloController::class, 'platillosjson'])->name('platillosjson');
 Route::get('complementosjson',[App\Http\Controllers\ComplementoController::class, 'complementosjson'])->name('complementosjson');
-route::get('bebidasjson',[App\Http\Controllers\BebidaController::class, 'bebidasjson'])->name('bebidasjson');
+Route::get('bebidasjson',[App\Http\Controllers\BebidaController::class, 'bebidasjson'])->name('bebidasjson');
+Route::post('pedidostore',[App\Http\Controllers\PedidoController::class, 'store'])->name('pedidostore');
 Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
