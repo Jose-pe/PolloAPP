@@ -16,13 +16,22 @@
                           @else
                           <p class="badge rounded-pill bg-danger">OCUPADO</p>   
                           @endif
+                          <div class="row">
+
+                           <form action="{{route('pedido.store')}}" method="POST">
+                              @csrf
+                              @method('POST')
+                              <input name="idmesa" type="text" value={{$mesa->id}}>
+                           
                           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                            
-                
-                           
+                            <button type="submit" class="btn btn-primary">Atender</button>
+                            <button type="button" class="btn btn-secondary">Ver Pedidos</button>
+                          </form>   
                            
                            
                           </div>
+                        </div>
                         </div>
                       </div>
                     </a>

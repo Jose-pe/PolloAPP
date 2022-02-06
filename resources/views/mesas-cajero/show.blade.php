@@ -2,7 +2,7 @@
 @section('content')
 
     <section class="container">
-
+        
           <div class="row mt-5">
             <div class="col">
               <div>
@@ -12,25 +12,30 @@
                 @else  
                 <p class="badge bg-success">Libre </p>  
                 @endif
-                <p class="badge bg-success">{{date('Y-m-d')}}</p>
+                <p id="fecha" class="badge bg-success">{{date('Y-m-d')}}</p>
                 <p>{{$mesa->nrosillas}}</p> 
-                <p>{{$mesa->id}}</p>
+                <p id="idmesa">{{$mesa->id}}</p>
               </div>
             </div>
             <div class="col">
               <div class="btn-group mt-4">
-               
+                <button type="button" class="btn btn-success m-2" >Ver Pedidos</button>
                 <button type="button" id="botonatendermesa" class="btn btn-success m-2" >Atender Mesa</button>
                 <button type="button" id="botoncancelarpedido" class="btn btn-danger m-2" disabled>Cancelar Atencion</button>
-
-               
-
             </div>
+            <p id="idpedido"></p>
+            <p id="totalapagar"></p>
             </div>
           </div>
           <div class="row">
-            @foreach ($mesa->pedidos as $pedido)                  
-
+            @foreach ($mesa->pedidos as $pedido)  
+            
+       @if ($pedido->detallepedidos->isEmpty())
+               
+       @else
+                 
+           
+            
             <div class="card text-white bg-success m-2" style="max-width: 18rem;">
               <div class="card-header"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" >{{$pedido->id}}</strong></div>
               <div class="card-body">
@@ -77,6 +82,7 @@
               
               
           </div>
+    @endif
           @endforeach
             
           </div>
@@ -109,7 +115,7 @@
                                   </div>
                                   <div class="mb-3">
                                     <label for="cantidad" class="form-label">Cantidad</label>
-                                    <input type="number" required min="1" max="500" value="1" class="form-control" id="cantidadplato" placeholder="Ingresar la Cantidad para este Pedido">
+                                    <input type="number" required min="1" max="500" value="" class="form-control" id="cantidadplato" placeholder="Ingresar la Cantidad para este Pedido">
                                     <div class="alerta alert alert-danger" role="alert">
                                        <p class="p-2">La cantidad del pedido tiene que ser mayor a 0</p>
                                        <button type="button"  class="botoncerraralerta btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -179,11 +185,13 @@
                         </div>
                      </div>
                     </article>
+                               
+                                            
 
-                    <div class="row mt-5" id="seccionpedidos">
-                            <h2> Lista de Pedidos para la <span class="badge bg-success">{{$mesa->nromesa}}</span></h2> 
-
-                            <div class="col mt-5">
+                    </section>
+                    <div class="row mt-2" id="secciondetallepedidos">
+                      
+                            <div class="col mt-2">
                                 <table class="table">
                                     <thead>
                                       <tr>
@@ -197,12 +205,19 @@
                                     </thead>
                                     <tbody id="tablaplatos">
 
-                                     
+                                    {{--Aqui el Scrit main.js escribe los pedidos--}}
                                      
                                      
                                     </tbody>
                                   </table>
-
+                                  <div class="row">
+                                    <div class="col mt-3">
+                                      <button id="botonconfirmarpedido" type="button" class="btn btn-primary btn-lg m-3">Confirmar Pedido</button>
+                                      <button type="button" class="btn btn-primary btn-lg">Cancelar Pedidos</button>
+                                    </div>
+                                  
+                                    
+                                  </div>
                             </div>
                     </div>
 

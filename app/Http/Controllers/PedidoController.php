@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use Response;
 
 class PedidoController extends Controller
 {
@@ -15,8 +16,8 @@ class PedidoController extends Controller
     public function index()
     {
         //
-        $pedidos = Pedidos::all();
-        return view('', compact('pedidos'));
+        $pedidos = Pedido::all();
+        return view('pedidos-cajero.index', compact('pedidos'));
     }
 
     /**
@@ -38,8 +39,12 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
         //
+        
         $input= $request->all();
+        $input['fecha'] = date('Y-m-d');
+        $input['totalapagar']="0.0";
         $pedido=Pedido::create($input);
+        return view('mesas-cajero.show');
     }
 
     /**
@@ -48,9 +53,11 @@ class PedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idmesa)
     {
         //
+        $pedidos = Pedido::where('idmesa','==',$idmesa);
+        return view('pedidos-cajero.index', compact('pedidos'));
     }
 
     /**
@@ -85,5 +92,15 @@ class PedidoController extends Controller
     public function destroy($id)
     {
         //
+        $pedido = Pedido::find($id);
+        $pedido->delete();
+        return view('mesas-cajero.show');
+    }
+    public function pedidojson($idmesa){
+        $pedidos = Pedido::all()->where('idmesa',$idmesa)->last();
+        return Response::json(
+         array('success' => true,
+                'pedidos' => $pedidos
+        ),200);
     }
 }

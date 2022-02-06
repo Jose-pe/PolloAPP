@@ -22,6 +22,8 @@ let botonagregarcomplemento = document.getElementById("botonagregarcomplemento")
 let botonatendermesa = document.getElementById("botonatendermesa");
 let botoncancelarpedido= document.getElementById("botoncancelarpedido");
 
+let botonconfirmarpedido=document.getElementById("botonconfirmarpedido");
+
 //console.log(botoncerrar);
 function cargarcomplementos() {
       let selectcomplemento = document.getElementById('selectcomplemento');
@@ -84,9 +86,6 @@ function cargarbebidas() {
             cantidadbebida.value=1;
 
         });
-
-
-
     });
 
   
@@ -127,6 +126,8 @@ function cargarplatos(){
        
     });
 }
+
+
 
 cargarplatos();
 cargarbebidas();
@@ -182,6 +183,7 @@ let preciotabla= document.getElementById("preciotabla");
 
 let indextabla =0;
 
+
 function borrardetallepedido(indextabla) {
     let indexpedido = document.getElementById(indextabla);         
     indexpedido.replaceWith(" ");
@@ -210,11 +212,11 @@ function agregarplato(){
         
         
     tablaplatos.innerHTML += "<tr id='"+ indextabla +"'>"+ 
-                "<th>"+ idplato.textContent +"</td>"+
-                "<td>"+ platoseleccionado.text +"</td>"+
-                "<td>"+ cantidad +"</td>"+
+                "<th class='idplato'>"+ idplato.textContent +"</td>"+
+                "<td >"+ platoseleccionado.text +"</td>"+
+                "<td class='cantidadplato'>"+ cantidad +"</td>"+
                 "<td>"+ precio +" </td>"+
-                "<td>"+ subtotal+"</td>"+   
+                "<td class='subtotalplato'>"+ subtotal+"</td>"+   
                 "<td>"+
                 
                 "<div class='btn-group' role='group'>"+
@@ -258,11 +260,11 @@ function agregarbebida() {
     else{
 
         tablaplatos.innerHTML +=  "<tr id='"+ indextabla +"'>"+ 
-                    "<th>"+ idbebida.textContent +"</td>"+
+                    "<th class='idbebida'>"+ idbebida.textContent +"</td>"+
                     "<td>"+ bebidaseleccionada.text +"</td>"+
-                    "<td>"+ cantidad +"</td>"+
+                    "<td class='cantidadbebida'>"+ cantidad +"</td>"+
                     "<td>"+ precio +" </td>"+
-                    "<td>"+ subtotal+"</td>"+   
+                    "<td class='subtotalbebida'>"+ subtotal+"</td>"+   
                     "<td>"+
         
                     "<div class='btn-group' role='group'>"+
@@ -298,11 +300,11 @@ function agregarcomplemento(){
     }
     else{
         tablaplatos.innerHTML += "<tr id='"+ indextabla +"'>"+ 
-                        "<th>"+ idcomplemento.textContent +"</td>"+
+                        "<th class='idcomplemento'>"+ idcomplemento.textContent +"</td>"+
                         "<td>"+ complementoseleccionado.text +"</td>"+
-                        "<td>"+ cantidad +"</td>"+
+                        "<td class='cantidadcomplemento'>"+ cantidad +"</td>"+
                         "<td>"+ precio +" </td>"+
-                        "<td>"+ subtotal+"</td>"+   
+                        "<td class='subtotalcomplemento'>"+ subtotal+"</td>"+   
             "<td>"+
 
                     "<div class='btn-group' role='group'>"+
@@ -319,8 +321,10 @@ botonagregarcomplemento.addEventListener("click", agregarcomplemento);
 
 function crearpedido(){
 
+    let idmesa = document.getElementById('idmesa');
+    let fecha = document.getElementById('fecha');
     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    fetch("http://polloapp.in/pedidostore",{
+    fetch("/pedidostore",{
 
                 headers:{
                     "Content-Type":"application/json",
@@ -331,42 +335,136 @@ function crearpedido(){
                 method:"post",
                 credentials:"same-origin",
                 body: JSON.stringify({
-                    fecha: '2022/02/03',
-                    totalapagar: '50',
+                    fecha: fecha.textContent,
+                    totalapagar: '00',
                     estado: '0',
-                    idmesa:'2'
+                    idmesa:idmesa.textContent
                 })
     })
     .then((data)=>{
-        console.log("pedidoguardado")
+        console.log("pedidoguardado");
+        cargarpedido();
     })
     .catch(function(error){
         console.log(error);
     });
 }
+function borraratencion(){
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    let idpedido = document.getElementById('idpedido');
+        fetch("/pedidodelete/"+idpedido.textContent,{
+            headers:{
+                "Content-Type":"application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-Whith":"XMLHttpRequest", 
+                "X-CSRF-TOKEN":token
+            },
+            method:"DELETE",
+            credentials:"same-origin"
+        })           
+            .then((data)=>{
+                console.log("pedido eliminada")
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+}
+
+
+
+function mostrarpedido(){
+
+}
 
 function atendermesa(){
-
+    crearpedido();
+       
     let botonesproductos = document.getElementById('botonesproductos');
-    let seccionpedidos = document.getElementById('seccionpedidos');
-    
-    seccionpedidos.style.display= "flex";
+    let secciondetallepedidos = document.getElementById('secciondetallepedidos');
+    secciondetallepedidos.style.display= "flex";
     botonesproductos.style.display="flex";
     botonatendermesa.disabled=true;
     botoncancelarpedido.disabled= false;
+   
     
+    
+}
+
+function cargarpedido(){
+    let idmesa = document.getElementById('idmesa');
+    let idpedido = document.getElementById('idpedido');
+    let total = document.getElementById('totalapagar');
+    fetch('/pedidojson/'+ idmesa.textContent)
+    .then(response => response.json())
+    .then(datapedidos =>{   
+        console.log(datapedidos.pedidos);
+        idpedido.textContent=datapedidos.pedidos.id;
+        total.textContent = datapedidos.pedidos.totalapagar;
+    });
 }
 
 botonatendermesa.addEventListener("click", atendermesa);
 
 function cancelarpedido(){
     let botonesproductos = document.getElementById('botonesproductos');
-    let seccionpedidos = document.getElementById('seccionpedidos');
-    
-    seccionpedidos.style.display= "none";
+    let secciondetallepedidos = document.getElementById('secciondetallepedidos');
+    let formplatos = document.getElementById('formplatos');
+    let formbebidas = document.getElementById('formbebidas');
+    let formcomplementos = document.getElementById('formcomplementos');
+    formplatos.style.display="none";
+    formbebidas.style.display="none";
+    formcomplementos.style.display="none";
+    secciondetallepedidos.style.display= "none";
     botonesproductos.style.display="none";
     botonatendermesa.disabled=false;
     botoncancelarpedido.disabled= true;
+    borraratencion();
 }
 
 botoncancelarpedido.addEventListener("click", cancelarpedido);
+
+function confirmarpedido(){
+    let idplatos=document.getElementsByClassName('idplato');
+    let cantidadplatos=document.getElementsByClassName('cantidadplato');
+    let subtotalplatos=document.getElementsByClassName('subtotalplato');
+
+    let idbebidas=document.getElementsByClassName('idbebida');
+    let cantidadbebidas=document.getElementsByClassName('cantidadbebida');
+    let subtotalbebidas=document.getElementsByClassName('subtotalbebida');
+
+    let idcomplementos=document.getElementsByClassName('idcomplemento');
+    let cantidadcomplementos=document.getElementsByClassName('cantidadcomplemento');
+    let subtotalcomplemento=document.getElementsByClassName('subtotalcomplemento');
+    console.log(idplatos);
+    
+   
+
+    for (let i = 0; i < idplatos.length; i++) {
+        let platosconfirmado = idplatos[i];
+        let cantidadplatoconfirmado=cantidadplatos[i];
+        let subtotalplatoconfirmado = subtotalplatos[i]
+
+        console.log("platos" +platosconfirmado.textContent + cantidadplatoconfirmado.textContent + subtotalplatoconfirmado.textContent);
+    }
+
+    for (let i = 0; i < idbebidas.length; i++) {
+        let bebidasconfirmada = idbebidas[i];
+        let cantidadbebidaconfirmada=cantidadbebidas[i];
+        let subtotalbebidaconfirmada=subtotalbebidas[i];
+
+        console.log("bebida"+ bebidasconfirmada.textContent + cantidadbebidaconfirmada.textContent + subtotalbebidaconfirmada.textContent);
+
+    }
+
+    for (let i = 0; i < idcomplementos.length; i++) {
+        let complementosconfirmado = idcomplementos[i];
+        let cantidadcomplementoconfirmado= cantidadcomplementos[i];
+        let subtotalcomplementoconfirmado= subtotalcomplemento[i];
+
+        console.log("complemento"+ complementosconfirmado.textContent + cantidadcomplementoconfirmado.textContent + subtotalcomplementoconfirmado.textContent );
+        
+    }
+
+}
+
+botonconfirmarpedido.addEventListener("click", confirmarpedido);

@@ -1,11 +1,14 @@
 @extends('layouts.layoutcajero')
 @section('content')
     <div class="container">
-        <div>
-            @foreach ($ as $item)
-                
-            @endforeach
+        <div class="row">
+            <div>               
+                @foreach ($pedidos as $pedido)
+                    
+                @endforeach
+            </div>
+    
         </div>
-           
+       
     </div>
 @endsection    

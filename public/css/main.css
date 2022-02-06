@@ -4,9 +4,12 @@
 .alerta, #alertacantidadbebida{
     display: none;
 }
-#seccionpedidos, #botonesproductos{
+#seccionpedidos, #botonesproductos , #secciondetallepedidos{
     display: none;    
 }
 #botonesplatos{
     max-width: 25rem;
+}
+#totalapagar{
+    font-size: 2.5rem;
 }
