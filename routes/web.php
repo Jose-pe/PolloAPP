@@ -27,6 +27,8 @@ Route::get('bebidasjson',[App\Http\Controllers\BebidaController::class, 'bebidas
 Route::get('pedidojson/{idmesa}',[App\Http\Controllers\PedidoController::class, 'pedidojson'])->name('pedidojason');
 Route::delete('pedidodelete/{idpedido}',[App\Http\Controllers\PedidoController::class,'destroy'])->name('pedidodelete'); 
 Route::post('pedidostore',[App\Http\Controllers\PedidoController::class, 'store'])->name('pedidostore');
+Route::put('pedidoupdate/{idpedido}',[App\Http\Controllers\PedidoController::class, 'update'])->name('pedidoupdate');
+Route::post('detallestore',[App\Http\Controllers\DetallePedidoController::class, 'store'])->name('detallestore');
 Route::get('/', function () {
     return view('welcome');
 })->name('inicio');

@@ -19,7 +19,7 @@
             </div>
             <div class="col">
               <div class="btn-group mt-4">
-                <button type="button" class="btn btn-success m-2" >Ver Pedidos</button>
+                <button type="button" id="botonverpedido" class="btn btn-success m-2" >Ver Pedidos</button>
                 <button type="button" id="botonatendermesa" class="btn btn-success m-2" >Atender Mesa</button>
                 <button type="button" id="botoncancelarpedido" class="btn btn-danger m-2" disabled>Cancelar Atencion</button>
             </div>
@@ -212,7 +212,7 @@
                                   </table>
                                   <div class="row">
                                     <div class="col mt-3">
-                                      <button id="botonconfirmarpedido" type="button" class="btn btn-primary btn-lg m-3">Confirmar Pedido</button>
+                                      <button id="botonconfirmarpedido"  type="button" class="btn btn-primary btn-lg m-3">Confirmar Pedido</button>
                                       <button type="button" class="btn btn-primary btn-lg">Cancelar Pedidos</button>
                                     </div>
                                   

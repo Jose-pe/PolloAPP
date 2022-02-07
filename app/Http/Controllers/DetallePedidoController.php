@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\DetallePedido;
 use Illuminate\Http\Request;
 
 class DetallePedidoController extends Controller
@@ -37,6 +37,8 @@ class DetallePedidoController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $detallepedidos = DetallePedido::create($input);
     }
 
     /**

@@ -81,6 +81,9 @@ class PedidoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $input=$request->all();
+        $pedido = Pedido::find($id);
+        $pedido->update($input);
     }
 
     /**

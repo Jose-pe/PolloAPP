@@ -6,7 +6,7 @@
                     
                 
                 <div class="col">
-                  <a class="col" href="{{route('mesa.show', $mesa->id)}}">
+                  <a href="{{route('mesa.show', $mesa->id)}}">
                     <div class="card text-dark bg-light mb-3" style="max-width: 18rem; max-height: 18rem;">
                         <div class="card-header"><h6 class="text-center">{{$mesa->nromesa}}</h6></div>
                         <div class="card-body">
@@ -16,28 +16,13 @@
                           @else
                           <p class="badge rounded-pill bg-danger">OCUPADO</p>   
                           @endif
-                          <div class="row">
-
-                           <form action="{{route('pedido.store')}}" method="POST">
-                              @csrf
-                              @method('POST')
-                              <input name="idmesa" type="text" value={{$mesa->id}}>
-                           
-                          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                           
-                            <button type="submit" class="btn btn-primary">Atender</button>
-                            <button type="button" class="btn btn-secondary">Ver Pedidos</button>
-                          </form>   
-                           
-                           
-                          </div>
                         </div>
                         </div>
+                      </a>                         
                       </div>
-                    </a>
-                </div>            
+                    
                 @endforeach
-            </div>
+              </div> 
 
         </section>
 @endsection
