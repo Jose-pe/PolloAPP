@@ -15,15 +15,37 @@ let botoncerraralerta = document.getElementsByClassName("botoncerraralerta");
 
 let botonagregarplato = document.getElementById("botonagregarplato");
 let botonagregarbebida = document.getElementById("botonagregarbebida");
-let botonagregarcomplemento = document.getElementById(
-    "botonagregarcomplemento"
-);
+let botonagregarcomplemento = document.getElementById("botonagregarcomplemento");
 
 let botonatendermesa = document.getElementById("botonatendermesa");
 let botoncancelarpedido = document.getElementById("botoncancelarpedido");
 let botonverpedido = document.getElementById("botonverpedido");
+let botonatendido = document.getElementById("botonatendido");
 
 let botonconfirmarpedido = document.getElementById("botonconfirmarpedido");
+let idpedido = document.getElementById("idpedido");
+let verificador = document.getElementsByClassName("subtotal");
+let listapedidos =document.getElementsByClassName("listapedidos");
+
+
+    window.addEventListener("beforeunload", function (e) {
+           if (idpedido.textContent == "") {
+               
+           } else {
+
+            if (verificador.length==0) {
+                let mensaje = "Esta seguro de Salir?";
+   
+                e.returnValue = mensaje;  
+                borraratencion();   
+                return mensaje; 
+            } else {
+                
+            }
+            
+           }        
+    });    
+
 
 //console.log(botoncerrar);
 function cargarcomplementos() {
@@ -411,6 +433,13 @@ function borraratencion() {
 }
 
 function atendermesa() {
+
+  if (listapedidos.length>0) {
+        alert("Esta MESA esta OCUPADA");      
+  }else {
+        
+    
+
     crearpedido();
     let botonesproductos = document.getElementById("botonesproductos");
     let secciondetallepedidos = document.getElementById(
@@ -420,6 +449,7 @@ function atendermesa() {
     botonesproductos.style.display = "flex";
     botonatendermesa.disabled = true;
     botoncancelarpedido.disabled = false;
+}
 }
 
 function cargarpedido() {
@@ -438,13 +468,15 @@ function cargarpedido() {
 botonatendermesa.addEventListener("click", atendermesa);
 
 function cancelarpedido() {
-    let botonesproductos = document.getElementById("botonesproductos");
-    let secciondetallepedidos = document.getElementById(
-        "secciondetallepedidos"
-    );
+    let botonesproductos = document.getElementById("botonesproductos");    
+    let secciondetallepedidos = document.getElementById("secciondetallepedidos");
     let formplatos = document.getElementById("formplatos");
     let formbebidas = document.getElementById("formbebidas");
     let formcomplementos = document.getElementById("formcomplementos");
+
+    let idpedido = document.getElementById("idpedido");
+    idpedido.textContent="";
+
     formplatos.style.display = "none";
     formbebidas.style.display = "none";
     formcomplementos.style.display = "none";
@@ -470,6 +502,74 @@ function sumarsubtotales() {
     }
     totalapagar.textContent = total;
 }
+
+function modificaestadomesa(estado){
+    let idmesa = document.getElementById("idmesa");
+    let nombremesa = document.getElementById("nombremesa");
+    let nrosillas = document.getElementById("nrosillas");
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+    fetch("/mesaupdate/"+ idmesa.textContent ,{
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json, text-plain, */*",
+            "X-Requested-Whith": "XMLHttpRequest",
+            "X-CSRF-TOKEN": token,
+        },
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify({
+            nromesa: nombremesa.textContent,
+            nrosillas: nrosillas.textContent,
+            estado: estado,
+            
+        }),
+    })
+    .then((data)=>{
+        console.log("estado de mesa modificado");
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+
+}
+//funcion para cambiar el estado del pedido
+function atendido(){
+    let idpedidoconfirmado = document.getElementById("idpedidoconfirmado");
+    let totalapagarconfirmado=document.getElementById("totalapagarconfirmado");
+    let fechaconfirmada=document.getElementById("fechaconfirmada");
+    let idmesa=document.getElementById("idmesa");
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    
+    fetch("/pedidoupdate/" + idpedidoconfirmado.textContent, {
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json, text-plain, */*",
+            "X-Requested-Whith": "XMLHttpRequest",
+            "X-CSRF-TOKEN": token,
+        },
+        method: "PUT",
+        credentials: "same-origin",
+        body: JSON.stringify({
+            fecha: fechaconfirmada.textContent,
+            totalapagar: totalapagarconfirmado.textContent,
+            estado: "1",
+            idmesa: idmesa.textContent,
+        }),
+    })
+        .then((data) => {
+            console.log("estado de pedido cambiado ")
+            
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        modificaestadomesa(1);
+        window.location.replace("/mesascajero");
+
+}
+//botonatendido.addEventListener("click",atendido);
+
 
 function modificarpedido() {
     sumarsubtotales();
@@ -509,7 +609,11 @@ function modificarpedido() {
 function confirmarpedido() {
   
         modificarpedido();
-    
+    let verificador = document.getElementsByClassName('subtotal');
+    if (verificador.length==0) {
+        alert("NO puedes confirmar un pedido VACIO");
+    } else {
+         
     
     let idplatos = document.getElementsByClassName("idplato");
     let cantidadplatos = document.getElementsByClassName("cantidadplato");
@@ -631,7 +735,10 @@ function confirmarpedido() {
                 subtotalcomplementoconfirmado.textContent
         );
     }
+   
+    modificaestadomesa(0);
     location.reload();
+}
 }
 
 botonconfirmarpedido.addEventListener("click", confirmarpedido);

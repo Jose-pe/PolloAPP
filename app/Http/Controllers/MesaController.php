@@ -60,10 +60,10 @@ class MesaController extends Controller
     {
         //
         $mesa= Mesa::find($id);
-        $bebidas=Bebida::all();
+        /*$bebidas=Bebida::all();
         $platillos= Platillo::all();
-        $complementos= Complemento::all();
-        return view('mesas-cajero.show', compact('mesa','bebidas','platillos','complementos'));
+        $complementos= Complemento::all();*/
+        return view('mesas-cajero.show', compact('mesa'));
       
     }
 
@@ -119,5 +119,11 @@ class MesaController extends Controller
     {
         $mesas = Mesa::all();
         return view('mesas-cajero.index', compact('mesas'));
+    }
+
+    public function mesaupdate(Request $request,$id){
+        $input= $request->all();
+        $mesa= Mesa::find($id);
+        $mesa->update($input);
     }
 }

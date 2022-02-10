@@ -21,6 +21,7 @@ Route::resource('pedido', App\Http\Controllers\PedidoController::class);
 
 
 Route::get('mesascajero',[App\Http\Controllers\MesaController::class, 'mostrarmesas'])->name('mesascajero');
+Route::post('mesaupdate/{idmesa}',[App\Http\Controllers\MesaController::class, 'mesaupdate'])->name('mesaupdate');
 Route::get('platillosjson',[App\Http\Controllers\PlatilloController::class, 'platillosjson'])->name('platillosjson');
 Route::get('complementosjson',[App\Http\Controllers\ComplementoController::class, 'complementosjson'])->name('complementosjson');
 Route::get('bebidasjson',[App\Http\Controllers\BebidaController::class, 'bebidasjson'])->name('bebidasjson');
@@ -29,6 +30,7 @@ Route::delete('pedidodelete/{idpedido}',[App\Http\Controllers\PedidoController::
 Route::post('pedidostore',[App\Http\Controllers\PedidoController::class, 'store'])->name('pedidostore');
 Route::put('pedidoupdate/{idpedido}',[App\Http\Controllers\PedidoController::class, 'update'])->name('pedidoupdate');
 Route::post('detallestore',[App\Http\Controllers\DetallePedidoController::class, 'store'])->name('detallestore');
+
 Route::get('/', function () {
     return view('welcome');
 })->name('inicio');

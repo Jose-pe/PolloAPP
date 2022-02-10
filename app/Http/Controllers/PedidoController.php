@@ -106,4 +106,5 @@ class PedidoController extends Controller
                 'pedidos' => $pedidos
         ),200);
     }
+    
 }
