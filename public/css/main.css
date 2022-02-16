@@ -13,3 +13,6 @@
 #totalapagar{
     font-size: 2.5rem;
 }
+#botonaumentarplato, #botonaumentarbebida, #botonaumentarcomplemento{
+    display: none;
+}

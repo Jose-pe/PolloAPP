@@ -6,13 +6,13 @@
           <div class="row mt-5">
             <div class="col">
               <div>
-                <h2 id="nombremesa" class=" text-success">{{$mesa->nromesa}}</h2>    
+                <h2 id="nombremesa" class="text-success fs-1">{{$mesa->nromesa}}</h2>    
                 @if ($mesa->estado == 0)
-                <p class="badge bg-danger"> Ocupado </p>
+                <p class="badge bg-danger fs-5"> Ocupado </p>
                 @else  
-                <p class="badge bg-success">Libre </p>  
+                <p class="badge bg-success fs-5">Libre </p>  
                 @endif
-                <p id="fecha" class="badge bg-success">{{date('Y-m-d')}}</p>
+                <p id="fecha" class="badge bg-success fs-5">{{date('Y-m-d')}}</p>
                 <p id="nrosillas">{{$mesa->nrosillas}}</p> 
                 <p id="idmesa">{{$mesa->id}}</p>
               </div>
@@ -20,13 +20,13 @@
             <div class="col">
               <div class="btn-group mt-4">
              
-                <button type="button" id="botonatendermesa" class="btn btn-success m-2" >Atender Mesa</button>
+                <button type="button" id="botonatendermesa" class="btn btn-success m-2 btn-lg" >Atender Mesa</button>
 
        
-                <button type="button" id="botonverpedido" class="btn btn-success m-2" >Ver Pedidos</button>
+                <button type="button" id="botonverpedido" class="btn btn-success m-2 btn-lg" >Ver Pedidos</button>
 
            
-                <button type="button" id="botoncancelarpedido" class="btn btn-danger m-2" disabled>Cancelar Atencion</button>
+                <button type="button" id="botoncancelarpedido" class="btn btn-danger m-2 btn-lg" disabled>Cancelar Atencion</button>
             </div>
             <p id="idpedido"></p>
             <p id="totalapagar"></p>
@@ -63,13 +63,17 @@
                                 <input type="number" required min="1" max="500" value="" class="form-control" id="cantidadplato" placeholder="Ingresar la Cantidad para este Pedido">
                                 <div class="alerta alert alert-danger" role="alert">
                                    <p class="p-2">La cantidad del pedido tiene que ser mayor a 0</p>
-                                   <button type="button"  class="botoncerraralerta btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
-
+                                    <button type="button"  class="botoncerraralerta btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                               </div>
                             
                         <button type="button" class="botoncerrar btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <button id="botonagregarplato" disabled class="btn btn-primary btn-lg">Agregar Plato</button>
+                       
+                         <button id="botonaumentarplato" disabled class="btn btn-primary btn-lg">Aumentar Plato</button>  
+             
+                         <button id="botonagregarplato" disabled class="btn btn-primary btn-lg">Agregar Plato</button>     
+                        
+                       
                       </div>    
                       </div>
                      <div id="formbebidas" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -99,6 +103,8 @@
                           
                       <button type="button"  class="botoncerrar btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       <button id="botonagregarbebida" disabled class="btn  btn-primary btn-lg">Agregar Bebida</button>
+                      <button id="botonaumentarbebida" disabled class="btn  btn-primary btn-lg">Aumentar Bebida</button>
+
                     </div>    
                     </div>
                    <div id="formcomplementos" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -127,6 +133,7 @@
                         
                     <button type="button"  class="botoncerrar btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <button id="botonagregarcomplemento" disabled class="btn  btn-primary btn-lg">Agregar Complemento</button>
+                    <button id="botonaumentarcomplemento" disabled class="btn  btn-primary btn-lg">Aumentar Complemento</button>
                     </div>
                  </div>
                 </article>
@@ -158,6 +165,8 @@
                               <div class="row">
                                 <div class="col mt-3">
                                   <button id="botonconfirmarpedido"  type="button" class="btn btn-primary btn-lg m-3">Confirmar Pedido</button>
+                                  <button id="botonaumentarpedido"  type="button" class="btn btn-primary btn-lg m-3">Aumentar Pedido</button>
+
                                 </div>
                               
                                 
@@ -168,51 +177,54 @@
         </div>
 
         <section class="row mt-5">
-          <h3 class="text-success p-4 fs-2">Lista de Pedidos:</h3>
+          <h3 class="text-success p-4 fs-1">Lista de Pedidos:</h3>
         </section>
 
 
-          <div class="row">
+       <div class="row mb-5">
+          <div class="col">
+
+           
     @foreach ($mesa->pedidos as $pedido)  
 
       @if ($pedido->estado==1)
                
       @else
             
-            <div class="card text-white bg-success m-2 listapedidos" style="max-width: 18rem;">
-              <div class="card-header"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" id="idpedidoconfirmado">{{$pedido->id}}</strong></div>
+            <div class="card text-white bg-success m-2 listapedidos" style="max-width: 38rem;">
+              <div class="card-header fs-4"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" id="idpedidoconfirmado">{{$pedido->id}}</strong></div>
               <div class="card-body">
-                <p class="card-text" id="fechaconfirmada">{{$pedido->fecha}} </p>  
+                <p class="card-text fs-4" id="fechaconfirmada">{{$pedido->fecha}} </p>  
                 @if ($pedido->estado == 0)
-                <span class="badge rounded-pill bg-warning text-dark mb-2 p-2">En Espera</span>
+                <span class="badge rounded-pill bg-warning text-dark mb-2 p-2 fs-5">En Espera</span>
                 @else                            
                 <span class="badge rounded-pill bg-primary mb-2 p-2">Atendido</span>     
                 @endif                                             
               @foreach ($pedido->detallepedidos as $detalle)                          
-                <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;"> 
+                <div class="card text-dark bg-warning mb-3" style="max-width: 30rem;"> 
                                     
                   @if ($detalle->idplatillo==null)
                    
                   @else
-                  <p class="m-1 p-1">{{$detalle->platillos['nombreplatillo']}}</p>
-                  <p class="m-1 p-1"> <strong>Tamaño: </strong> {{$detalle->platillos['tamanio']}}</p>
+                  <p class="m-1 p-1 fs-4 fw-bold">{{$detalle->platillos['nombreplatillo']}}</p>
+                  <p class="m-1 p-1 fs-3"> <strong>Tamaño: </strong> {{$detalle->platillos['tamanio']}}</p>
 
                   @endif
                  
                   @if ($detalle->idbebida==null)
                     
                   @else
-                  <p class="m-1 p-1">{{$detalle->bebidas['nombrebebida']}}</p>
-                  <p class="m-1 p-1"><strong>Tamaño: </strong> {{$detalle->bebidas['tamanio']}}</p> 
+                  <p class="m-1 p-1 fs-4 fw-bold">{{$detalle->bebidas['nombrebebida']}}</p>
+                  <p class="m-1 p-1 fs-3"><strong>Tamaño: </strong> {{$detalle->bebidas['tamanio']}}</p> 
                   @endif
                   
                   @if ($detalle->idcomplemento == null)
                       
                   @else
-                  <p class="m-1 p-1">{{$detalle->complementos['nombrecomplemento']}}</p>
-                  <p class="m-1 p-1">{{$detalle->complementos['tamanio']}}</p> 
+                  <p class="m-1 p-1 fs-4 fw-bold">{{$detalle->complementos['nombrecomplemento']}}</p>
+                  <p class="m-1 p-1 fs-3"> <strong>Tamaño:</strong> {{$detalle->complementos['tamanio']}}</p> 
                   @endif     
-                  <p class="m-1 p-1"> <strong> Cant: </strong> {{$detalle->cantidad}}</p>  
+                  <p class="m-1 p-1 fs-3"> <strong class="fs-4"> Cant: </strong> {{$detalle->cantidad}}</p>  
 
                 </div>                   
                
@@ -221,22 +233,24 @@
               <div class="row">
                 <hr>
                 <div class="col">
-                  <button onclick="atendido()" id="botonatendido" type="button" class="btn btn-danger">Atendido</button>
+                  <button onclick="atendido()" id="botonatendido" type="button" class="btn btn-danger btn-lg">Atendido</button>
 
                 </div>
                 <div class="col">
-                  <button type="button" class="btn btn-danger">Aumentar</button>
+                  <button onclick="aumentarpedido()" type="botonaumentarpedido" class="btn btn-danger btn-lg">Aumentar</button>
                </div>
                </div>       
               </div>
               <hr>
-              <h5 class="card-title"> <strong> Precio:</strong> <strong id="totalapagarconfirmado"> {{$pedido->totalapagar}} </strong> <strong> s/. </strong> </h5>
+              <h5 class="card-title p-2 fs-3"> <strong> Precio:</strong> <strong id="totalapagarconfirmado"> {{$pedido->totalapagar}} </strong> <strong> s/. </strong> </h5>
           </div>
       @endif
     @endforeach
             
-          </div>         
+          </div>    
+        </div>     
 
+       
                  
 
     </section>

@@ -27,7 +27,15 @@ let idpedido = document.getElementById("idpedido");
 let verificador = document.getElementsByClassName("subtotal");
 let listapedidos =document.getElementsByClassName("listapedidos");
 
+let botonaumentarpedido= document.getElementById("botonaumentarpedido");
 
+let botonaumentarplato = document.getElementById("botonaumentarplato");
+let botonaumentarbebida= document.getElementById("botonaumentarbebida");
+let botonaumentarcomplemento = document.getElementById("botonaumentarcomplemento");
+
+
+
+//detectar si el usuario abandona la pagina de abandonarla se borra el pedido inconcluso
     window.addEventListener("beforeunload", function (e) {
            if (idpedido.textContent == "") {
                
@@ -79,8 +87,10 @@ function cargarcomplementos() {
 
                 if (index == "def") {
                     botonagregarcomplemento.disabled = true;
+                    botonaumentarcomplemento.disabled=true;
                 } else {
                     botonagregarcomplemento.disabled = false;
+                    botonaumentarcomplemento.disabled= false;
                 }
                 preciocomplemento.innerText =
                     datacomplementos.complementos[index].precio;
@@ -121,8 +131,10 @@ function cargarbebidas() {
 
                 if (index == "def") {
                     botonagregarbebida.disabled = true;
+                    botonaumentarbebida.disabled=true;
                 } else {
                     botonagregarbebida.disabled = false;
+                    botonaumentarbebida.disabled=false;
                 }
                 preciobebida.innerText = databebidas.bebidas[index].precio;
                 idbebida.innerText = databebidas.bebidas[index].id;
@@ -156,8 +168,10 @@ function cargarplatos() {
 
                 if (index == "def") {
                     botonagregarplato.disabled = true;
+                    botonaumentarplato.disabled=true;
                 } else {
                     botonagregarplato.disabled = false;
+                    botonaumentarplato.disabled= false;
                 }
                 precioplato.innerText = data.platillos[index].precio;
                 idplato.innerText = data.platillos[index].id;
@@ -406,8 +420,14 @@ function crearpedido() {
         });
 }
 
+
+
 function verpedidos() {}
 botonverpedido.addEventListener("click", verpedidos);
+
+
+
+
 
 function borraratencion() {
     let token = document
@@ -425,11 +445,13 @@ function borraratencion() {
         credentials: "same-origin",
     })
         .then((data) => {
-            console.log("pedido eliminada");
+            console.log("pedido eliminado");
+            idpedido.textContent="";
         })
         .catch(function (error) {
             console.log(error);
         });
+
 }
 
 function atendermesa() {
@@ -442,9 +464,9 @@ function atendermesa() {
 
     crearpedido();
     let botonesproductos = document.getElementById("botonesproductos");
-    let secciondetallepedidos = document.getElementById(
-        "secciondetallepedidos"
-    );
+    let secciondetallepedidos = document.getElementById("secciondetallepedidos");
+    botonaumentarpedido.style.display="none";
+        
     secciondetallepedidos.style.display = "flex";
     botonesproductos.style.display = "flex";
     botonatendermesa.disabled = true;
@@ -474,8 +496,9 @@ function cancelarpedido() {
     let formbebidas = document.getElementById("formbebidas");
     let formcomplementos = document.getElementById("formcomplementos");
 
-    let idpedido = document.getElementById("idpedido");
-    idpedido.textContent="";
+   
+    
+    borraratencion();
 
     formplatos.style.display = "none";
     formbebidas.style.display = "none";
@@ -484,7 +507,7 @@ function cancelarpedido() {
     botonesproductos.style.display = "none";
     botonatendermesa.disabled = false;
     botoncancelarpedido.disabled = true;
-    borraratencion();
+    
 }
 
 botoncancelarpedido.addEventListener("click", cancelarpedido);
@@ -742,3 +765,216 @@ function confirmarpedido() {
 }
 
 botonconfirmarpedido.addEventListener("click", confirmarpedido);
+function sumarsubtotalesaumento(nuevototal){
+    let subtotales = document.getElementsByClassName("subtotal");
+    let totalpedido = document.getElementById("totalapagarconfirmado");
+    let total = 0.0;
+    let subtotal = 0.0;
+    //let nuevototal=0;
+    for (let i = 0; i < subtotales.length; i++) {
+        subtotal = subtotales[i].textContent;
+
+        total = Number(subtotal) + Number(total);
+        console.log(total);
+    }
+    nuevototal= Number(total)  +  Number(totalpedido.textContent);
+    return nuevototal;
+    
+}
+function aumentarpedido(){
+    let botonesproductos = document.getElementById("botonesproductos");
+    let secciondetallepedidos = document.getElementById("secciondetallepedidos");
+    secciondetallepedidos.style.display = "flex";
+    botonesproductos.style.display = "flex";
+    botonagregarplato.style.display="none";
+    botonagregarbebida.style.display="none";
+    botonagregarcomplemento.style.display="none";
+    botonconfirmarpedido.style.display="none";
+    botonaumentarplato.style.display = "flex";
+    botonaumentarbebida.style.display = "flex";
+    botonaumentarcomplemento.style.display = "flex";
+    
+}
+
+botonaumentarplato.addEventListener("click", agregarplato);
+botonaumentarbebida.addEventListener("click", agregarbebida);
+botonaumentarcomplemento.addEventListener("click", agregarcomplemento);
+
+function confirmaraumentopedido(){
+
+    //recalculando el totalapagar de pedido para agregar el nuevo detalle de pedido
+let total = sumarsubtotalesaumento();
+console.log(total);
+
+let idpedido = document.getElementById("idpedidoconfirmado");
+let fecha =document.getElementById("fechaconfirmada");
+let totalapagar=document.getElementById("totalapagarconfirmado");
+let idmesa=document.getElementById("idmesa");
+let token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+totalapagar.textContent= total;
+
+//verificamos si la lista de pédidos esta vacia y si no lo esta modificamos el pedido para poner el nuevo precio
+let verificador = document.getElementsByClassName('subtotal');
+    if (verificador.length==0) {
+        alert("NO puedes confirmar un pedido VACIO");
+    } else {
+   fetch("/pedidoupdate/" + idpedido.textContent, {
+    headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text-plain, */*",
+        "X-Requested-Whith": "XMLHttpRequest",
+        "X-CSRF-TOKEN": token,
+    },
+    method: "PUT",
+    credentials: "same-origin",
+    body: JSON.stringify({
+        fecha: fecha.textContent,
+        totalapagar: totalapagar.textContent,
+        estado: "0",
+        idmesa: idmesa.textContent,
+        }),
+    })
+    .then((data) => {
+        console.log("pedidomodificado")
+        
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+    //agregar el nuevo pedido
+
+    //caturamos los pedidos de la lista para luego recorrer los arrays
+    let idplatos = document.getElementsByClassName("idplato");
+    let cantidadplatos = document.getElementsByClassName("cantidadplato");
+    let subtotalplatos = document.getElementsByClassName("subtotalplato");
+
+    let idbebidas = document.getElementsByClassName("idbebida");
+    let cantidadbebidas = document.getElementsByClassName("cantidadbebida");
+    let subtotalbebidas = document.getElementsByClassName("subtotalbebida");
+
+    let idcomplementos = document.getElementsByClassName("idcomplemento");
+    let cantidadcomplementos = document.getElementsByClassName(
+        "cantidadcomplemento"
+    );
+    let subtotalcomplemento = document.getElementsByClassName(
+        "subtotalcomplemento"
+    );
+    
+    //console.log(idplatos);
+    for (let i = 0; i < idplatos.length; i++) {
+        let platosconfirmado = idplatos[i];
+        let cantidadplatoconfirmado = cantidadplatos[i];
+        let subtotalplatoconfirmado = subtotalplatos[i];
+
+        fetch("/detallestore", {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json, text-plain, */*",
+                "X-Requested-Whith": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token,
+            },
+            method: "post",
+            credentials: "same-origin",
+            body: JSON.stringify({
+                idpedido: idpedido.textContent,
+                idplatillo: platosconfirmado.textContent,
+                idbebida: "",
+                idcomplemento: "",
+                cantidad: cantidadplatoconfirmado.textContent,
+                subtotal: subtotalplatoconfirmado.textContent,
+            }),
+        })
+            .then((data) => {
+                console.log("detalles guardados");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        //console.log("platos" +platosconfirmado.textContent + cantidadplatoconfirmado.textContent + subtotalplatoconfirmado.textContent);
+    
+        
+
+
+    }
+
+    for (let i = 0; i < idbebidas.length; i++) {
+        let bebidasconfirmada = idbebidas[i];
+        let cantidadbebidaconfirmada = cantidadbebidas[i];
+        let subtotalbebidaconfirmada = subtotalbebidas[i];
+        fetch("/detallestore", {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json, text-plain, */*",
+                "X-Requested-Whith": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token,
+            },
+            method: "post",
+            credentials: "same-origin",
+            body: JSON.stringify({
+                idpedido: idpedido.textContent,
+                idplatillo: "",
+                idbebida: bebidasconfirmada.textContent,
+                idcomplemento: "",
+                cantidad: cantidadbebidaconfirmada.textContent,
+                subtotal: subtotalbebidaconfirmada.textContent,
+            }),
+        })
+            .then((data) => {
+                console.log("detalles guardados");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        //console.log("bebida"+ bebidasconfirmada.textContent + cantidadbebidaconfirmada.textContent + subtotalbebidaconfirmada.textContent);
+    }
+
+
+
+
+    for (let i = 0; i < idcomplementos.length; i++) {
+        let complementosconfirmado = idcomplementos[i];
+        let cantidadcomplementoconfirmado = cantidadcomplementos[i];
+        let subtotalcomplementoconfirmado = subtotalcomplemento[i];
+        fetch("/detallestore", {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json, text-plain, */*",
+                "X-Requested-Whith": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token,
+            },
+            method: "post",
+            credentials: "same-origin",
+            body: JSON.stringify({
+                idpedido: idpedido.textContent,
+                idplatillo: "",
+                idbebida: "",
+                idcomplemento: complementosconfirmado.textContent,
+                cantidad: cantidadcomplementoconfirmado.textContent,
+                subtotal: subtotalcomplementoconfirmado.textContent,
+            }),
+        })
+            .then((data) => {
+                console.log("detalles guardados");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        console.log(
+            "complemento" +
+                complementosconfirmado.textContent +
+                cantidadcomplementoconfirmado.textContent +
+                subtotalcomplementoconfirmado.textContent
+        );
+    }
+
+
+            location.reload();
+
+    }
+
+}
+
+
+botonaumentarpedido.addEventListener("click", confirmaraumentopedido);
