@@ -97,7 +97,7 @@ class PedidoController extends Controller
         //
         $pedido = Pedido::find($id);
         $pedido->delete();
-        return view('mesas-cajero.show');
+        return view('mesas-meseros.show');
     }
     public function pedidojson($idmesa){
         $pedidos = Pedido::all()->where('idmesa',$idmesa)->last();

@@ -588,7 +588,7 @@ function atendido(){
             console.log(error);
         });
         modificaestadomesa(1);
-        window.location.replace("/mesascajero");
+        window.location.replace("/mesasmesero");
 
 }
 //botonatendido.addEventListener("click",atendido);
