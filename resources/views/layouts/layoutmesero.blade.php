@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
     <link href="../css/main.css" rel="stylesheet">
-    <title>PolloApp - Cajero</title>
+    <title>PolloApp - Mesero</title>
 </head>
 <body>
     <header>
@@ -20,9 +20,9 @@
                   </button>
                   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">                    
-                      <a class="nav-link">Cobrar Mesas</a>
-                      <a class="nav-link">Ver Pedidos</a>                      
-                      <a class="nav-link">Observar Pedido</a>                  
+                      <a class="nav-link">Ver Mesas</a>                      
+                      <a class="nav-link">Ver Pedidos</a>      
+                      <a class="nav-link">Para Llevar</a>                                 
                     </div>
                   </div>
                 </div>

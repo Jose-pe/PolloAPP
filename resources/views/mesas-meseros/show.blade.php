@@ -1,4 +1,4 @@
-@extends('layouts.layoutcajero')
+@extends('layouts.layoutmesero')
 @section('content')
 
     <section class="container">

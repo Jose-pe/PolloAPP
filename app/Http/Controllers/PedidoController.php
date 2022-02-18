@@ -17,7 +17,7 @@ class PedidoController extends Controller
     {
         //
         $pedidos = Pedido::all();
-        return view('pedidos-cajero.index', compact('pedidos'));
+        return view('pedidos-meseros.index', compact('pedidos'));
     }
 
     /**
@@ -44,7 +44,7 @@ class PedidoController extends Controller
         $input['fecha'] = date('Y-m-d');
         $input['totalapagar']="0.0";
         $pedido=Pedido::create($input);
-        return view('mesas-cajero.show');
+        return view('mesas-meseros.show');
     }
 
     /**
@@ -57,7 +57,7 @@ class PedidoController extends Controller
     {
         //
         $pedidos = Pedido::where('idmesa','==',$idmesa);
-        return view('pedidos-cajero.index', compact('pedidos'));
+        return view('pedidos-meseros.index', compact('pedidos'));
     }
 
     /**

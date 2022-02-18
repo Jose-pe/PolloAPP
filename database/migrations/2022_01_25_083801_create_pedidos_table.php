@@ -18,7 +18,7 @@ class CreatePedidosTable extends Migration
             $table->id();           
             $table->date('fecha');
             $table->double('totalapagar');
-            $table->boolean('estado')->default(0);
+            $table->smallinteger('estado')->default(0);
             $table->bigInteger('idmesa')->unsigned();
             $table->timestamps();
 
