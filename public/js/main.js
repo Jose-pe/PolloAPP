@@ -37,21 +37,32 @@ let botonaumentarcomplemento = document.getElementById("botonaumentarcomplemento
 
 //detectar si el usuario abandona la pagina de abandonarla se borra el pedido inconcluso
     window.addEventListener("beforeunload", function (e) {
-           if (idpedido.textContent == "") {
-               
-           } else {
-
-            if (verificador.length==0) {
-                let mensaje = "Esta seguro de Salir?";
-   
-                e.returnValue = mensaje;  
-                borraratencion();   
-                return mensaje; 
+            let totalapagar = this.document.getElementById('totalapagar');   
+          if (idpedido.textContent == "") {
+              
+          } else {
+            if (totalapagar.textContent > 0) {
+                    
             } else {
-                
-            }
+             borraratencion();
+             let mensaje = "Esta seguro de Salir?";
+             e.returnValue = mensaje;  
+             return mensaje; 
+             /*
+             if (verificador.length > 0) {
+                 let mensaje = "Esta seguro de Salir?";
+    
+                 e.returnValue = mensaje;  
+                 borraratencion();   
+                 return mensaje; 
+             } else {
+             }
+               */  
+             }
+          }  
+         
             
-           }        
+               
     });    
 
 

@@ -12,7 +12,7 @@
                 @else  
                 <p class="badge bg-success fs-5">Libre </p>  
                 @endif
-                <p id="fecha" class="badge bg-success fs-5">{{date('Y-m-d')}}</p>
+                <p id="fecha" class="badge bg-success fw-bold fs-5">{{date('Y-m-d')}}</p>
                 <p id="nrosillas">{{$mesa->nrosillas}}</p> 
                 <p id="idmesa">{{$mesa->id}}</p>
               </div>
@@ -194,7 +194,7 @@
             <div class="card text-white bg-success m-2 listapedidos" style="max-width: 38rem;">
               <div class="card-header fs-4"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" id="idpedidoconfirmado">{{$pedido->id}}</strong></div>
               <div class="card-body">
-                <p class="card-text fs-4" id="fechaconfirmada">{{$pedido->fecha}} </p>  
+                <p class="card-text fs-4 fw-bold" id="fechaconfirmada">{{$pedido->fecha}} </p>  
                 @if ($pedido->estado == 0)
                 <span class="badge rounded-pill bg-warning text-dark mb-2 p-2 fs-5">En Espera</span>
                 @else                            

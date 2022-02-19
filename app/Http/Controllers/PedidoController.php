@@ -106,5 +106,12 @@ class PedidoController extends Controller
                 'pedidos' => $pedidos
         ),200);
     }
+
+    public function cobrarpedido(Request $request, $id){
+        $input=$request->all();
+        $input['estado'] = 3;
+        $pedido = Pedido::find($id);
+        $pedido->update($input);
+    }
     
 }

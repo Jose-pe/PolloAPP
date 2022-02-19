@@ -19,11 +19,11 @@
             <div class="card text-white bg-success m-2 listapedidos" style="max-width: 38rem;">
                 <div class="card-header fs-4"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" id="idpedidoconfirmado">{{$pedido->id}}</strong></div>
                 <div class="card-body">
-                  <p class="card-text fs-4" id="fechaconfirmada">{{$pedido->fecha}} </p>  
+                  <p class="card-text fs-4 fw-bold" id="fechaconfirmada">{{$pedido->fecha}} </p>  
                   @if ($pedido->estado == 0)
                   <span class="badge rounded-pill bg-warning text-dark mb-2 p-2 fs-5">En Espera</span>
                   @else                            
-                  <span class="badge rounded-pill bg-primary mb-2 p-2">Atendido</span>     
+                  <span class="badge rounded-pill bg-danger  mb-2 p-2 fs-5">Atendido</span>     
                   @endif                                             
                 @foreach ($pedido->detallepedidos as $detalle)                          
                   <div class="card text-dark bg-warning mb-3" style="max-width: 30rem;"> 
