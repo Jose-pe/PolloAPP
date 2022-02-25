@@ -1,4 +1,7 @@
+
 @extends('layouts.layoutadmin')
+    
+
 @section('content')
         <section class="container">
               

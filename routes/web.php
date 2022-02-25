@@ -36,10 +36,8 @@ Route::get('mesascajero',[App\Http\Controllers\MesaController::class, 'mostrarme
 Route::get('pedidoscajero/{idmesa}',[App\Http\Controllers\MesaController::class, 'mostrarmesacaja'])->name('pedidoscajero');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 })->name('inicio');
-
-
 
 Auth::routes();
 

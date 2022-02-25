@@ -22,7 +22,8 @@
                 <span class="badge rounded-pill bg-warning text-dark mb-2 p-2 fs-5">En Espera</span>
                 @else                            
                 <span class="badge rounded-pill bg-danger  mb-2 p-2 fs-5">Atendido</span>     
-                @endif                                             
+                @endif    
+                <hr>                                         
               @foreach ($pedido->detallepedidos as $detalle)                          
                 <div class="card text-dark bg-warning mb-3" style="max-width: 30rem;"> 
                                     
@@ -53,14 +54,14 @@
                    
                   <p class="m-1 p-1 fs-3"> <strong class="fs-4"> Cant: </strong> {{$detalle->cantidad}}</p>  
                   <p class="m-1 p-1 fs-3"> <strong class="fs-4"> Subtotal: </strong> {{$detalle->subtotal}}</p>  
-                  <hr>                   
+                                
 
                 </div>                   
-               
+                <hr> 
                                                     
               @endforeach   
               <div class="row">
-                <hr>
+                
                
                
                   <a class="btn btn-danger btn-lg" id="botoncobrarpedido">Cobrar Pedido</a>
