@@ -113,5 +113,10 @@ class PedidoController extends Controller
         $pedido = Pedido::find($id);
         $pedido->update($input);
     }
+
+    public function pedidoscobrados(){
+        $pedidos = Pedido::all()->where('estado','3');    
+        return view('pedidos-admin.index', compact('pedidos'));    
+    }
     
 }

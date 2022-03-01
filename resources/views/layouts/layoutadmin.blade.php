@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
            
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="{{route('inicio')}}">POLLOAPP</a>
+                  <a class="navbar-brand">POLLOAPP</a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -25,16 +25,21 @@
                       <a class="nav-link" href="{{route('platillo.index')}}">Platillos</a>
                       <a class="nav-link" href="{{route('bebida.index')}}">Bebidas</a>
                       <a class="nav-link" href="{{route('complemento.index')}}">Complementos</a>
-                      <a class="nav-link">Crear Cajero</a>
+                      
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('registrartrabajador') }}">Registrar</a>
+                                </li>
+                       
+                      <a  href="{{route('pedidoscobrados')}}" class="nav-link">Pedidos Cobrados</a>
                       <a class="nav-link">Ver Reportes</a>
                       <a class="nav-link">Ver Boletas</a>
                       <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-success" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

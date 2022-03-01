@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layoutadmin')
 
 @section('content')
 <div class="container">
@@ -7,10 +7,11 @@
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
+               
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('createuser') }}">
                         @csrf
-
+                        @method('POST')   
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -73,7 +74,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    Registrar
                                 </button>
                             </div>
                         </div>

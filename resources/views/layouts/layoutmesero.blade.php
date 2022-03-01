@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="../css/main.css" rel="stylesheet">
     <title>PolloApp - Mesero</title>
 </head>
@@ -14,22 +15,28 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
          
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="{{route('inicio')}}">POLLOAPP</a>
+                  <a class="navbar-brand" href="{{route('mesasmesero')}}">POLLOAPP</a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">                    
-                      <a class="nav-link">Ver Mesas</a>                      
-                      <a class="nav-link">Ver Pedidos</a>      
+                    <div class="navbar-nav">
+                      <li class="nav-item">                     
+                      <a href="{{route('mesasmesero')}}" class="nav-link">Ver Mesas</a>  
+                      </li>
+                      <li class="nav-item">                     
+                      <a class="nav-link">Mis Pedidos</a>   
+                      </li>
+                      <li class="nav-item">   
                       <a class="nav-link">Para Llevar</a>
-                      <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                      </li>
+                      <li class="nav-item dropdown text-success">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle  text-success" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
