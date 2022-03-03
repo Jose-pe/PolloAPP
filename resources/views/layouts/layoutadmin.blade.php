@@ -61,7 +61,7 @@
         </div>
         </nav>
     </header>
-    <section class="container">
+    <section class="container-fluid">
         @yield('content')
     </section>
     <footer class="footer">

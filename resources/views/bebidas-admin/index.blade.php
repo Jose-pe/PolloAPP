@@ -1,6 +1,6 @@
 @extends('layouts.layoutadmin')
 @section('content')
-
+<div class="container">
 <div class="d-flex justify-content-center mt-5">
     <h2>ADMINISTRADOR DE BEBIDAS </h2>
     <div class="m-5">
@@ -42,5 +42,5 @@
     </tbody>
   </table>
 </section>
-
+</div>
 @endsection

@@ -1,6 +1,6 @@
 @extends('layouts.layoutadmin')
 @section('content')
-
+<div class="container">
 <section class="d-flex justify-content-center mt-5">
     <h3>CREAR NUEVO PLATILLO</h3>
 </section>
@@ -31,6 +31,6 @@
           
     </form>      
 </section>
-    
+</div>    
 @endsection
 
