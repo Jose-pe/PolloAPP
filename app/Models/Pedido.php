@@ -13,6 +13,7 @@ class Pedido extends Model
         'totalapagar',       
         'estado',
         'idmesa',
+        'iduser'
         
     ];
 
@@ -21,5 +22,8 @@ class Pedido extends Model
     }
     public function mesas(){
         return $this->belogsTo(Mesa::class, 'idmesa', 'id');
+    }
+    public function iduser(){
+        return $this->belogsTo(User::class, 'iduser', 'id');
     }
 }

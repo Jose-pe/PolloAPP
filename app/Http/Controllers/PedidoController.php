@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\User;
 use Response;
 
 class PedidoController extends Controller
@@ -115,7 +116,8 @@ class PedidoController extends Controller
     }
 
     public function pedidoscobrados(){
-        $pedidos = Pedido::all()->where('estado','3');    
+        $pedidos = Pedido::all()->where('estado','3')->where('fecha',date('Y-m-d'));
+         
         return view('pedidos-admin.index', compact('pedidos'));    
     }
     

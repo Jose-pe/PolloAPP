@@ -1,18 +1,18 @@
 @extends('layouts.layoutadmin')
 
 @section('content')
-<div class="container-fluid mt-5">
+<div class="container mt-5">
     <h3>Pedidos Cobrados de Hoy</h3>
     <div class="row justify-content-center m-4 ">
       
-            <div class="col-4 offset-1">
+            <div class="col-6 offset-1">
             <button type="button" class="btn btn-warning">Buscar por Mesa</button>
             <button type="button" class="btn btn-warning">Buscar por Fecha</button>
             <button type="button" class="btn btn-warning">Buscar por Mesero</button>
           </div>
 
           <div id="buscarpormesa" class="row justify-content-center mt-4">
-          <div class="col-4">
+          <div class="col-6">
             <div class="row">
               <div class="input-group">
                 <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
@@ -28,7 +28,7 @@
           </div>
 
           <div id="buscarporfecha" class="row justify-content-center mt-4">
-            <div class="col-4">
+            <div class="col-6">
               <div class="row">
                 <div class="input-group">
                   <input type="date" class="form-control"  aria-describedby="button-addon2">
@@ -39,7 +39,7 @@
             </div>
 
             <div id="buscarpormesero" class="row justify-content-center mt-4">
-              <div class="col-4">
+              <div class="col-6">
                 <div class="row">
                   <div class="input-group">
                     <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
@@ -58,12 +58,44 @@
 
     <div class="row justify-content-center mt-5">
 
-    
-    @foreach ($pedidos as $pedido)
-      <div class="col-2 mt-5 m-1">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"># Pedido</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Estado</th>
 
-      
-         <div class="card text-white bg-success m-1 listapedidos" style="max-width: 20rem;" id="cardpedido">
+            <th scope="col">Total</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          
+          @foreach ($pedidos as $pedido)  
+             
+              <tr>            
+                <th scope="row">{{$pedido->id}}</th>
+                <td>{{$pedido->fecha}}</td>                       
+                <td>{{$pedido->estado}}</td>               
+                <td>{{$pedido->totalapagar}} S/.</td>
+                <td><a class="btn btn-success"> VER </a></td>
+              </tr>
+                 
+       
+              
+          @endforeach
+
+         
+        </tbody>
+      </table>
+
+        <!--     
+    @foreach ($pedidos as $pedido)
+      <div class="col-12 mt-5 m-1">
+
+        
+         <div class="card text-white bg-success m-1 listapedidos" style="width:70rem;" id="cardpedido">
               <div class="card-header fs-5"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" id="idpedidoconfirmado">{{$pedido->id}}</strong></div>
               <div class="card-body">
                 <p class="card-text fs-5 fw-bold" id="fechaconfirmada">{{$pedido->fecha}} </p>  
@@ -71,8 +103,10 @@
                 <span class="badge rounded-pill bg-primary text-white mb-2 p-2 fs-5">Cobrado</span>
                 @else                            
                 <span class="badge rounded-pill bg-danger  mb-2 p-2 fs-5">Atendido</span>     
-                @endif    
-                <hr>                                         
+                @endif                  
+               
+                  
+                                            
               @foreach ($pedido->detallepedidos as $detalle)                          
                 <div class="card text-dark bg-warning mb-3" style="max-width: 20rem;"> 
                                     
@@ -109,6 +143,8 @@
                 <hr> 
                                                     
               @endforeach   
+           
+              
             </div>
             
               <hr>
@@ -118,5 +154,5 @@
     @endforeach
   </div>
 </div>
-    
+         -->  
 @endsection

@@ -30,6 +30,8 @@
             </div>
             <p id="idpedido"></p>
             <p id="totalapagar"></p>
+            <p id="idusuario">{{Auth::user()->id}}</p>
+            <p>{{{Auth::user()->name}}}</p>
             </div>
           </div>
 

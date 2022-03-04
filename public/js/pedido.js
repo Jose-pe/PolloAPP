@@ -33,7 +33,7 @@ let botonaumentarplato = document.getElementById("botonaumentarplato");
 let botonaumentarbebida= document.getElementById("botonaumentarbebida");
 let botonaumentarcomplemento = document.getElementById("botonaumentarcomplemento");
 
-
+let idusuario = document.getElementById("idusuario");
 
 //detectar si el usuario abandona la pagina de abandonarla se borra el pedido inconcluso
     window.addEventListener("beforeunload", function (e) {
@@ -420,6 +420,7 @@ function crearpedido() {
             totalapagar: "00",
             estado: "0",
             idmesa: idmesa.textContent,
+            iduser: idusuario.textContent, 
         }),
     })
         .then((data) => {
@@ -589,6 +590,7 @@ function atendido(){
             totalapagar: totalapagarconfirmado.textContent,
             estado: "1",
             idmesa: idmesa.textContent,
+            iduser: idusuario.textContent,
         }),
     })
         .then((data) => {
@@ -629,6 +631,7 @@ function modificarpedido() {
             totalapagar: totalapagar.textContent,
             estado: "0",
             idmesa: idmesa.textContent,
+            iduser: idusuario.textContent,
         }),
     })
         .then((data) => {
@@ -844,6 +847,7 @@ let verificador = document.getElementsByClassName('subtotal');
         totalapagar: totalapagar.textContent,
         estado: "0",
         idmesa: idmesa.textContent,
+        iduser: idusuario.textContent,
         }),
     })
     .then((data) => {

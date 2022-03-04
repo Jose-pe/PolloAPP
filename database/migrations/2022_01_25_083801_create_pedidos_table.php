@@ -20,9 +20,11 @@ class CreatePedidosTable extends Migration
             $table->double('totalapagar');
             $table->smallinteger('estado')->default(0);
             $table->bigInteger('idmesa')->unsigned();
+            $table->bigInteger('iduser')->unsigned();
             $table->timestamps();
 
             $table->foreign('idmesa')->references('id')->on('mesas');
+            $table->foreign('iduser')->references('id')->on('users');
         });
     }
 

@@ -46,6 +46,7 @@ Route::get('/', function () {
 })->name('inicio');
 
 //Auth::routes();
+//desactivo la ruta /register que viene dentro de AUTH::ROUTES
 Auth::routes(["register" => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(checkmesa::class, checkcaja::class);
