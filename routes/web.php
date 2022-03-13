@@ -40,6 +40,7 @@ Route::post('detallestore',[App\Http\Controllers\DetallePedidoController::class,
 
 Route::get('mesascajero',[App\Http\Controllers\MesaController::class, 'mostrarmesascaja'])->name('mesascajero')->middleware(checkmesa::class);
 Route::get('pedidoscajero/{idmesa}',[App\Http\Controllers\MesaController::class, 'mostrarmesacaja'])->name('pedidoscajero')->middleware(checkmesa::class);
+Route::get('pedidosporfecha/{fecha}',[App\Http\Controllers\PedidoController::class, 'pedidosporfecha'])->name('pedidosporfecha');
 
 Route::get('/', function () {
     return view('auth.login');

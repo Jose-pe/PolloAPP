@@ -120,5 +120,16 @@ class PedidoController extends Controller
          
         return view('pedidos-admin.index', compact('pedidos'));    
     }
+
+    public function pedidosporfecha($fecha){
+
+        $pedidos = Pedido::where('fecha', $fecha)->get(); 
+       
+        return Response::json(
+            array('success' => true,
+                   'pedidos' => $pedidos
+           ),200);
+
+    }
     
 }

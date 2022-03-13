@@ -30,7 +30,7 @@
                                     <a class="nav-link" href="{{ route('registrartrabajador') }}">Registrar</a>
                                 </li>
                        
-                      <a  href="{{route('pedidoscobrados')}}" class="nav-link">Pedidos Cobrados</a>
+                      <a  href="{{route('pedidoscobrados')}}" class="nav-link">Pedidos Atendidos</a>
                       <a class="nav-link">Ver Reportes</a>
                       <a class="nav-link">Ver Boletas</a>
                       <li class="nav-item dropdown">

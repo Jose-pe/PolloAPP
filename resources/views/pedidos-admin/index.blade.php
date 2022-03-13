@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h3>Pedidos Cobrados de Hoy</h3>
+   
     <div class="row justify-content-center m-4 ">
       
             <div class="col-6 offset-1">
@@ -31,8 +31,8 @@
             <div class="col-6">
               <div class="row">
                 <div class="input-group">
-                  <input type="date" class="form-control"  aria-describedby="button-addon2">
-                  <button class="btn btn-outline-success" type="button" id="button-addon2">Buscar</button>
+                  <input type="date" class="form-control" id="fecha" aria-describedby="button-addon2">
+                  <button class="btn btn-outline-success"  id="botonbuscarporfecha">Buscar</button>
                 </div>
             </div>
             </div>
@@ -55,7 +55,7 @@
               </div>
    
     </div>
-
+    <h3 id="subtitulo">Pedidos Cobrados de Hoy</h3>
     <div class="row justify-content-center mt-5">
 
       <table class="table table-striped">
@@ -69,22 +69,11 @@
             <th scope="col">Acciones</th>
           </tr>
         </thead>
-        <tbody>
-        
+        <tbody id="tablapedido">
+
           
-          @foreach ($pedidos as $pedido)  
-             
-              <tr>            
-                <th scope="row">{{$pedido->id}}</th>
-                <td>{{$pedido->fecha}}</td>                       
-                <td>{{$pedido->estado}}</td>               
-                <td>{{$pedido->totalapagar}} S/.</td>
-                <td><a class="btn btn-success"> VER </a></td>
-              </tr>
-                 
-       
-              
-          @endforeach
+          
+         
 
          
         </tbody>
@@ -155,4 +144,7 @@
   </div>
 </div>
          -->  
+        </div>
+      </div>
+      <script src="../js/buscadoradmin.js"></script> 
 @endsection

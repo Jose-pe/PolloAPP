@@ -135,4 +135,13 @@ class MesaController extends Controller
         $mesa= Mesa::find($id);
         return view('pedidos-cajeros.index', compact('mesa'));
     }
+
+    public function mostrarmesasjson(){
+        $mesas= Mesa::all();
+        return Response::json(
+            array('success'=> true,
+                    'mesas'=>$mesas
+        ),200);
+    }
+
 }
