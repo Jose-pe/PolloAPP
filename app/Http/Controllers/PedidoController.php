@@ -131,5 +131,15 @@ class PedidoController extends Controller
            ),200);
 
     }
-    
+
+    public function pedidospormesa($idmesa){
+       
+        $pedidos = Pedido::where('idmesa', $idmesa)->get();
+        
+        return Response::json(
+            array('success' => true,
+                   'pedidos' => $pedidos
+           ),200);
+    }
+
 }

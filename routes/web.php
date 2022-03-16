@@ -40,7 +40,7 @@ Route::post('detallestore',[App\Http\Controllers\DetallePedidoController::class,
 
 Route::get('mesascajero',[App\Http\Controllers\MesaController::class, 'mostrarmesascaja'])->name('mesascajero')->middleware(checkmesa::class);
 Route::get('pedidoscajero/{idmesa}',[App\Http\Controllers\MesaController::class, 'mostrarmesacaja'])->name('pedidoscajero')->middleware(checkmesa::class);
-Route::get('pedidosporfecha/{fecha}',[App\Http\Controllers\PedidoController::class, 'pedidosporfecha'])->name('pedidosporfecha');
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -51,3 +51,6 @@ Route::get('/', function () {
 Auth::routes(["register" => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(checkmesa::class, checkcaja::class);
+Route::get('pedidosporfecha/{fecha}',[App\Http\Controllers\PedidoController::class, 'pedidosporfecha'])->name('pedidosporfecha')->middleware(checkmesa::class, checkcaja::class);;
+Route::get('mostrarmesas', [App\Http\Controllers\MesaController::class, 'mostrarmesasjson'])->name('mostrarmesas')->middleware(checkmesa::class, checkcaja::class);
+Route::get('pedidospormesa/{idmesa}',[App\Http\Controllers\PedidoController::class, 'pedidospormesa']);
