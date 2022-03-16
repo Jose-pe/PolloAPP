@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Response;
 
 class UserController extends Controller
 {
@@ -16,5 +17,13 @@ class UserController extends Controller
         $usuario = User::create($input);
     
         return redirect()->route('home');
+    }
+    public function listarmeserosjson()
+    {
+        $meseros = User::where('rol','Mesero')->get();
+        return Response::json(
+            array('success'=> true,
+                    'users'=>$meseros
+        ),200);
     }
 }

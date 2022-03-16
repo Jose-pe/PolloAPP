@@ -5,6 +5,7 @@ let selectmesas = document.getElementById('selectmesas');
 let tablapedidos = document.getElementById('tablapedido');
 let subtitulo = document.getElementById('subtitulo'); 
 vermesas();
+vermeseros();
 
 fechabuscar.addEventListener('change', function(){
 
@@ -117,5 +118,19 @@ function vermesas(){
 
 
 
+    });
+}
+
+function vermeseros(){
+    let selectmesero = document.getElementById('selectmesero');
+    fetch("mostrarmeseros")
+    .then((response) => response.json())
+    .then((datameseros) => {
+           
+        for (let index = 0; index < datameseros.users.length; index++) {
+            
+            selectmesero.innerHTML += "<option value='"+ datameseros.users[index].id +"'>"+  datameseros.users[index].name +"</option>";
+        }
+        
     });
 }
