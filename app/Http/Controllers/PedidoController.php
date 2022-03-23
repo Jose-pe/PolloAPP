@@ -142,4 +142,16 @@ class PedidoController extends Controller
            ),200);
     }
 
+    public function pedidosporuser($iduser){
+
+        $pedidos = Pedido::where('iduser', $iduser)->get();
+
+        return Response::json(
+            array('success' => true, 
+                  'pedidos' => $pedidos
+        ),200);
+
+
+    }
+
 }

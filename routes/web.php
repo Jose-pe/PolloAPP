@@ -54,4 +54,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('pedidosporfecha/{fecha}',[App\Http\Controllers\PedidoController::class, 'pedidosporfecha'])->name('pedidosporfecha')->middleware(checkmesa::class, checkcaja::class);;
 Route::get('mostrarmesas', [App\Http\Controllers\MesaController::class, 'mostrarmesasjson'])->name('mostrarmesas')->middleware(checkmesa::class, checkcaja::class);
 Route::get('mostrarmeseros', [App\Http\Controllers\UserController::class, 'listarmeserosjson'])->name('mostrarmeseros')->middleware(checkmesa::class, checkcaja::class);;
+Route::get('pedidosporuser/{iduser}', [App\Http\Controllers\PedidoController::class, 'pedidosporuser'])->name('pedidosporuser')->middleware(checkmesa::class, checkcaja::class);
 Route::get('pedidospormesa/{idmesa}',[App\Http\Controllers\PedidoController::class, 'pedidospormesa'])->middleware(checkmesa::class, checkcaja::class);

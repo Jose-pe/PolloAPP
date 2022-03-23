@@ -3,6 +3,7 @@ let botonbuscarporfecha = document.getElementById('botonbuscarporfecha');
 let fechabuscar = document.getElementById('fecha');
 let selectmesas = document.getElementById('selectmesas');
 let tablapedidos = document.getElementById('tablapedido');
+let selectmesero = document.getElementById('selectmesero');
 let subtitulo = document.getElementById('subtitulo'); 
 vermesas();
 vermeseros();
@@ -12,12 +13,17 @@ fechabuscar.addEventListener('change', function(){
     let fecha = fechabuscar.value;
     console.log('fecha - ' + fecha);   
     mostrarpedidosporfecha(fecha);
-    }
-   );
+});
 
 selectmesas.addEventListener('change',function(){
     let idmesa = selectmesas.value;
     mostrarpedidospormesa(idmesa);
+});
+
+selectmesero.addEventListener('change', function(){
+    let iduser = selectmesero.value;
+    console.log("iduser= "+ iduser);
+    mostrarpedidospormesero(iduser);
 });
 
 
@@ -101,6 +107,48 @@ function mostrarpedidospormesa(idmesa){
                    "</tr>";    
 
            }
+    });
+}
+
+function mostrarpedidospormesero(iduser){
+    tablapedidos.innerHTML="";
+
+    fetch("pedidosporuser/"+ iduser)
+    .then((response) => response.json())
+    .then((datapedidos) =>{
+
+            if (datapedidos.pedidos.length==0) {
+                subtitulo.textContent="No hay pedidos para este Mesero";
+            }
+            else{
+                subtitulo.textContent="Pedidos de realizados por " ;
+            }
+                     
+            for (let index = 0; index < datapedidos.pedidos.length; index++) {
+                 
+
+                tablapedidos.innerHTML +=
+                "<tr>"+
+                "<td>"+
+                datapedidos.pedidos[index].id +
+                "</td>"+
+                "<td>"+
+                datapedidos.pedidos[index].fecha +
+                "</td>"+
+                "<td>"+
+                datapedidos.pedidos[index].estado +
+                "</td>"+
+                "<td>"+
+                datapedidos.pedidos[index].totalapagar +
+                "</td>"+
+                "<td>"+
+                "<a> Ver </a>"+
+                "</td>"+
+                "</tr>";    
+
+        }
+            
+
     });
 }
 
