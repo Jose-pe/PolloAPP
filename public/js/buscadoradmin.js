@@ -1,12 +1,39 @@
-let botonbuscarporfecha = document.getElementById('botonbuscarporfecha');
+let botonpormesa = document.getElementById('botonpormesa');
+let botonporfecha = document.getElementById('botonporfecha');
+let botonpormesero = document.getElementById('botonpormesero');
+let buscarpormesa = document.getElementById('buscarpormesa');
+let buscarporfecha = document.getElementById('buscarporfecha');
+let buscarpormesero = document.getElementById('buscarpormesero');   
 
 let fechabuscar = document.getElementById('fecha');
 let selectmesas = document.getElementById('selectmesas');
 let tablapedidos = document.getElementById('tablapedido');
 let selectmesero = document.getElementById('selectmesero');
 let subtitulo = document.getElementById('subtitulo'); 
+
+
 vermesas();
 vermeseros();
+
+
+botonpormesa.addEventListener('click', function(){
+    buscarpormesa.style.display = "flex";
+    buscarporfecha.style.display = "none";
+    buscarpormesero.style.display="none";
+});
+
+botonporfecha.addEventListener("click", function(){
+    buscarpormesa.style.display = "none";
+    buscarporfecha.style.display = "flex";
+    buscarpormesero.style.display="none";
+});
+
+botonpormesero.addEventListener("click", function(){
+    buscarpormesa.style.display = "none";
+    buscarporfecha.style.display = "none";
+    buscarpormesero.style.display="flex";
+});
+
 
 fechabuscar.addEventListener('change', function(){
 

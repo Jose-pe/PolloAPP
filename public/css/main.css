@@ -16,3 +16,7 @@
 #botonaumentarplato, #botonaumentarbebida, #botonaumentarcomplemento{
     display: none;
 }
+
+#buscarpormesa, #buscarporfecha, #buscarpormesero {
+   display: none;
+}

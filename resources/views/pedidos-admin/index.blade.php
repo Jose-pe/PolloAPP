@@ -5,10 +5,10 @@
    
     <div class="row justify-content-center m-4 ">
       
-            <div class="col-6 offset-1">
-            <button type="button" class="btn btn-warning">Buscar por Mesa</button>
-            <button type="button" class="btn btn-warning">Buscar por Fecha</button>
-            <button type="button" class="btn btn-warning">Buscar por Mesero</button>
+            <div class="col-6 offset-1 mb-4">
+            <button type="button" id="botonpormesa" class="btn btn-warning">Buscar por Mesa</button>
+            <button type="button" id="botonporfecha" class="btn btn-warning">Buscar por Fecha</button>
+            <button type="button" id="botonpormesero" class="btn btn-warning">Buscar por Mesero</button>
           </div>
 
           <div id="buscarpormesa" class="row justify-content-center mt-4">
@@ -16,10 +16,8 @@
             <div class="row">
               <div class="input-group">
                 <select class="form-select" id="selectmesas" aria-label="Example select with button addon">
-                 
-                  
+                                   
                 </select>
-                <button class="btn btn-outline-success" type="button">Buscar</button>
               </div>
           </div>
           </div>
@@ -30,7 +28,6 @@
               <div class="row">
                 <div class="input-group">
                   <input type="date" class="form-control" id="fecha" aria-describedby="button-addon2">
-                  <button class="btn btn-outline-success"  id="botonbuscarporfecha">Buscar</button>
                 </div>
             </div>
             </div>
@@ -43,7 +40,6 @@
                     <select class="form-select" id="selectmesero" aria-label="Example select with button addon">
                       
                     </select>
-                    <button class="btn btn-outline-success" type="button">Buscar</button>
                   </div>
               </div>
               </div>

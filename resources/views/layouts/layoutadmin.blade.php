@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="../css/main.css" rel="stylesheet">
     <title>PolloApp - Admin</title>
     
 </head>
