@@ -28,7 +28,7 @@
                       <a class="nav-link" href="{{route('complemento.index')}}">Complementos</a>
                       
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('registrartrabajador') }}">Registrar</a>
+                                    <a class="nav-link" href="{{ route('registrartrabajador') }}">Registrar Empleado</a>
                                 </li>
                        
                       <a  href="{{route('pedidoscobrados')}}" class="nav-link">Pedidos Atendidos</a>

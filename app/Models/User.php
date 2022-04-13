@@ -44,6 +44,9 @@ class User extends Authenticatable
     ];
 
     public function pedidos(){
-        return $this->hasMany(Pedido::class, 'iduser','id');
+        return $this->hasMany(Pedido::class, 'idpedido','id');
+    }  
+    public function boletas(){
+        return $this->hasone(Boleta::class, 'iduser','id');
     }  
 }

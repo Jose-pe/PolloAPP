@@ -15,7 +15,17 @@
             @if ($pedido->estado ==1)
 
             <div class="card text-white bg-success m-2 listapedidos" style="max-width: 38rem;" id="cardpedido">
-              <div class="card-header fs-4"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" id="idpedidoconfirmado">{{$pedido->id}}</strong></div>
+             
+              <div class="card-header fs-4 row">
+                <div class="col"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" id="idpedidoconfirmado">{{$pedido->id}}</strong></div>
+               
+                <div class="col">
+                <input type="text" class="form-control mx-2" placeholder="Ingrese Nro de Boleta" >
+                </div>
+        
+              </div>
+         
+
               <div class="card-body">
                 <p class="card-text fs-4 fw-bold" id="fechaconfirmada">{{$pedido->fecha}} </p>  
                 @if ($pedido->estado == 0)
@@ -63,7 +73,7 @@
               <div class="row">
                 
                
-               
+
                   <a class="btn btn-danger btn-lg" id="botoncobrarpedido">Cobrar Pedido</a>
                
                </div>       

@@ -23,7 +23,10 @@ class Pedido extends Model
     public function mesas(){
         return $this->belogsTo(Mesa::class, 'idmesa', 'id');
     }
-    public function iduser(){
+    public function users(){
         return $this->belogsTo(User::class, 'iduser', 'id');
+    }
+    public function boletas(){
+        return $this->belongsTo(Boleta::class, 'idpedido','id');
     }
 }

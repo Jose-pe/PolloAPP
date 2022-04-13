@@ -2,7 +2,7 @@
 @section('content')
 <section class="container">
 
-    <div class="row">
+    <div class="row mt-5">
         @foreach ($mesas as $mesa)
         <div class="col">
             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
