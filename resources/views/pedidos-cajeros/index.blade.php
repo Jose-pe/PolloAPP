@@ -7,8 +7,12 @@
 
                 <p class="">{{$mesa->nrosillas}}</p>
                 <p id="idmesa">{{$mesa->id}}</p>
+                <p id="idusuario">{{Auth::user()->id}}</p>
             </div>
-       
+            
+    </div>
+    <div class="alert alert-danger" role="alert" id="alertcajero">
+      Ingrese un nro de boleta valido!
     </div>
     <div class="row mt-4">
         @foreach ($mesa->pedidos as $pedido)
@@ -20,7 +24,7 @@
                 <div class="col"><strong> Nro de Pedido: </strong> <strong class="badge bg-warning text-dark" id="idpedidoconfirmado">{{$pedido->id}}</strong></div>
                
                 <div class="col">
-                <input type="text" class="form-control mx-2" placeholder="Ingrese Nro de Boleta" >
+                <input id="numerodeboleta" type="number" class="form-control mx-2" placeholder="Ingrese Nro de Boleta" >
                 </div>
         
               </div>

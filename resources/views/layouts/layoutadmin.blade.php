@@ -32,8 +32,9 @@
                                 </li>
                        
                       <a  href="{{route('pedidoscobrados')}}" class="nav-link">Pedidos Atendidos</a>
+                      <a href="{{route('listarboletas')}}"  class="nav-link">Ver Boletas</a>
                       <a class="nav-link">Ver Reportes</a>
-                      <a class="nav-link">Ver Boletas</a>
+                     
                       <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-success" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}

@@ -18,12 +18,18 @@ class UserController extends Controller
     
         return redirect()->route('home');
     }
-    public function listarmeserosjson()
-    {
+    public function listarmeserosjson(){
         $meseros = User::where('rol','Mesero')->get();
         return Response::json(
             array('success'=> true,
                     'users'=>$meseros
         ),200);
+    }
+    public function listarcajerosjson(){
+        $cajeros = User::where('rol','Cajero')->get();
+        return Response::json(
+            array( 'success'=> true,
+                    'users'=> $cajeros
+            ),200);
     }
 }

@@ -9,11 +9,11 @@ class Boleta extends Model
 {
     use HasFactory;
     protected $fillable = [
-         'fecha',
-         'total',     
-         'nroboleta',
-         'iduser',   
-         'idpedido',
+        'nro',    
+        'fecha',
+        'total',          
+        'iduser',   
+        'idpedido',
     ];
     public function users(){
         return $this->belogsTo(User::class, 'iduser', 'id');

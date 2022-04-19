@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Boleta;
+use Response;
 
 class BoletaController extends Controller
 {
@@ -14,6 +16,8 @@ class BoletaController extends Controller
     public function index()
     {
         //
+        $boletas = Boleta::all();
+        return view('boletas-admin.index', compact('boletas'));
     }
 
     /**
@@ -84,5 +88,13 @@ class BoletaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function boletasporuser($iduser){
+        $boletas = Boleta::where('iduser', $iduser)->get();
+        
+        return Response::json(
+            array( 'success' => true,
+                'boletas' => $boletas
+            ),200);
     }
 }

@@ -38,7 +38,7 @@ botonpormesero.addEventListener("click", function(){
 fechabuscar.addEventListener('change', function(){
 
     let fecha = fechabuscar.value;
-    console.log('fecha - ' + fecha);   
+    //console.log('fecha - ' + fecha);   
     mostrarpedidosporfecha(fecha);
 });
 
@@ -49,7 +49,7 @@ selectmesas.addEventListener('change',function(){
 
 selectmesero.addEventListener('change', function(){
     let iduser = selectmesero.value;
-    console.log("iduser= "+ iduser);
+    //console.log("iduser= "+ iduser);
     mostrarpedidospormesero(iduser);
 });
 

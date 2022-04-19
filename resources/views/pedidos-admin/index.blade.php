@@ -16,7 +16,7 @@
             <div class="row">
               <div class="input-group">
                 <select class="form-select" id="selectmesas" aria-label="Example select with button addon">
-                                   
+                     <option selected value="">Seleccione una Mesa</option>              
                 </select>
               </div>
           </div>
@@ -38,7 +38,7 @@
                 <div class="row">
                   <div class="input-group">
                     <select class="form-select" id="selectmesero" aria-label="Example select with button addon">
-                      
+                      <option selected value="">Seleccione un Mesero</option> 
                     </select>
                   </div>
               </div>

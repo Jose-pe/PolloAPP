@@ -20,3 +20,9 @@
 #buscarpormesa, #buscarporfecha, #buscarpormesero {
    display: none;
 }
+#alertcajero{
+    display: none;
+}
+#buscarporfecha{
+    display: none;
+}

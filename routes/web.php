@@ -40,7 +40,7 @@ Route::post('detallestore',[App\Http\Controllers\DetallePedidoController::class,
 
 Route::get('mesascajero',[App\Http\Controllers\MesaController::class, 'mostrarmesascaja'])->name('mesascajero')->middleware(checkmesa::class);
 Route::get('pedidoscajero/{idmesa}',[App\Http\Controllers\MesaController::class, 'mostrarmesacaja'])->name('pedidoscajero')->middleware(checkmesa::class);
-Route::post('boletastore', [App\Http\Controllers\BoletaController::class, 'boletastore'])->name('boletastore')->middleware(checkmesa::class);                   
+Route::post('boletastore', [App\Http\Controllers\BoletaController::class, 'store'])->name('boletastore')->middleware(checkmesa::class);                   
 
 Route::get('/', function () {
     return view('auth.login');
@@ -56,3 +56,6 @@ Route::get('mostrarmesas', [App\Http\Controllers\MesaController::class, 'mostrar
 Route::get('mostrarmeseros', [App\Http\Controllers\UserController::class, 'listarmeserosjson'])->name('mostrarmeseros')->middleware(checkmesa::class, checkcaja::class);;
 Route::get('pedidosporuser/{iduser}', [App\Http\Controllers\PedidoController::class, 'pedidosporuser'])->name('pedidosporuser')->middleware(checkmesa::class, checkcaja::class);
 Route::get('pedidospormesa/{idmesa}',[App\Http\Controllers\PedidoController::class, 'pedidospormesa'])->middleware(checkmesa::class, checkcaja::class);
+Route::get('listarboletas', [App\Http\Controllers\BoletaController::class, 'index'])->name('listarboletas')->middleware(checkmesa::class, checkcaja::class);
+Route::get('mostrarcajeros', [App\Http\Controllers\UserController::class, 'listarcajerosjson'])->name('mostrarcajerosjson')->middleware(checkmesa::class, checkcaja::class);
+Route::get('boletasporuser/{iduser}',[App\Http\Controllers\BoletaController::class, 'boletasporuser'])->name('boletasporuser')->middleware(checkmesa::class, checkcaja::class);

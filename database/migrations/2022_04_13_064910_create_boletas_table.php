@@ -15,7 +15,8 @@ class CreateBoletasTable extends Migration
     {
         Schema::create('boletas', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('nro');
+            $table->id();
+            $table->bigInteger('nro');
             $table->date('fecha');
             $table->double('total');
             $table->bigInteger('idpedido')->unsigned();
