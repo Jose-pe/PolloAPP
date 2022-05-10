@@ -4,77 +4,104 @@ let botonporfecha = document.getElementById("botonporfecha");
 let buscarporcajero = document.getElementById("buscarporcajero");
 let buscarporfecha = document.getElementById("buscarporfecha");
 let selectcajero = document.getElementById("selectcajero");
+let selectfecha  = document.getElementById("selectfecha");
 
 let tablaboletas = document.getElementById("tablaboletas");
-let subtitulo = document.getElementById("subtituloboleta"); 
+let subtitulo = document.getElementById("subtituloboleta");
 
-
-botonporcajero.addEventListener("click", mostrarbuscarporcajero);   
-botonporfecha.addEventListener("click", mostrarbuscarporfecha); 
+botonporcajero.addEventListener("click", mostrarbuscarporcajero);
+botonporfecha.addEventListener("click", mostrarbuscarporfecha);
 
 vercajeros();
-function mostrarbuscarporcajero(){
-
-        buscarporfecha.style.display="none";
-        buscarporcajero.style.display="flex"
-
+function mostrarbuscarporcajero() {
+    buscarporfecha.style.display = "none";
+    buscarporcajero.style.display = "flex";
 }
-function mostrarbuscarporfecha(){
-
-        buscarporfecha.style.display = "flex";
-        buscarporcajero.style.display="none"
+function mostrarbuscarporfecha() {
+    buscarporfecha.style.display = "flex";
+    buscarporcajero.style.display = "none";
 }
 
-selectcajero.addEventListener("change", function(){
-        let iduser =  selectcajero.value;
-        mostrarboletaporcajero(iduser);
-        console.log("id de cajero: "+ iduser);   
-
+selectcajero.addEventListener("change", function () {
+    let iduser = selectcajero.value;
+    mostrarboletaporcajero(iduser);
+    console.log("id de cajero: " + iduser);
 });
 
+selectfecha.addEventListener("change", function(){
+        let fecha = selectfecha.value;
+        mostrarboletasporfecha(fecha);
+        console.log("fecha de boleta" + fecha);
+});
 
-function mostrarboletaporcajero(idcajero){
+function mostrarboletasporfecha(fechaboleta) {
+    tablaboletas.innerHTML = "";
+    fetch("boletasporfecha/" + fechaboleta)
+        .then((response) => response.json())
+        .then((databoletas) => {
+            for (let index = 0; index < databoletas.boletas.length; index++) {
+                tablaboletas.innerHTML +=
+                    "<tr>" +
+                    "<td>" +
+                    databoletas.boletas[index].id +
+                    "</td>" +
+                    "<td>" +
+                    databoletas.boletas[index].nro +
+                    "</td>" +
+                    "<td>" +
+                    databoletas.boletas[index].fecha +
+                    "</td>" +
+                    "<td>" +
+                    databoletas.boletas[index].total +
+                    " S/." +
+                    "</td>" +
+                    "<td>" +
+                    "<button type='button' class='btn btn-success'>Ver</button>" +
+                    "</td>" +
+                    "</tr>";
+            }
+        });
+}
+function mostrarboletaporcajero(idcajero) {
     tablaboletas.innerHTML = "";
     fetch("boletasporuser/" + idcajero)
-    .then((response)=> response.json())
-    .then((databoletas)=>{
-       
-
-       for (let index = 0; index < databoletas.boletas.length; index++) {
-            
-            tablaboletas.innerHTML += 
-            "<tr>"+
-            "<td>"+
-            databoletas.boletas[index].id +
-            "</td>"+
-            "<td>"+
-            databoletas.boletas[index].nro +
-            "</td>"+        
-            "<td>"+
-            databoletas.boletas[index].fecha +
-            "</td>"+
-            "<td>"+
-            databoletas.boletas[index].total + " S/."+
-            "</td>"+
-            "<td>"+
-            "<button type='button' class='btn btn-success'>Ver</button>"+
-            "</td>"+
-            "</tr>";
-
-           
-       }
-
-    });
+        .then((response) => response.json())
+        .then((databoletas) => {
+            for (let index = 0; index < databoletas.boletas.length; index++) {
+                tablaboletas.innerHTML +=
+                    "<tr>" +
+                    "<td>" +
+                    databoletas.boletas[index].id +
+                    "</td>" +
+                    "<td>" +
+                    databoletas.boletas[index].nro +
+                    "</td>" +
+                    "<td>" +
+                    databoletas.boletas[index].fecha +
+                    "</td>" +
+                    "<td>" +
+                    databoletas.boletas[index].total +
+                    " S/." +
+                    "</td>" +
+                    "<td>" +
+                    "<button type='button' class='btn btn-success'>Ver</button>" +
+                    "</td>" +
+                    "</tr>";
+            }
+        });
 }
 
-function vercajeros(){
-  
+function vercajeros() {
     fetch("mostrarcajeros")
-    .then((response)=> response.json())
-    .then((datacajeros) => {
+        .then((response) => response.json())
+        .then((datacajeros) => {
             for (let index = 0; index < datacajeros.users.length; index++) {
-                
-                selectcajero.innerHTML += "<option value='"+ datacajeros.users[index].id +"'>"+ datacajeros.users[index].name +"</option>"
+                selectcajero.innerHTML +=
+                    "<option value='" +
+                    datacajeros.users[index].id +
+                    "'>" +
+                    datacajeros.users[index].name +
+                    "</option>";
             }
-    });
+        });
 }

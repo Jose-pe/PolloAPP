@@ -85,10 +85,10 @@ function mostrarpedidosporfecha(fecha){
                     datapedidos.pedidos[index].estado +
                     "</td>"+
                     "<td>"+
-                    datapedidos.pedidos[index].totalapagar +
+                    datapedidos.pedidos[index].totalapagar +" s/."+
                     "</td>"+
                     "<td>"+
-                    "<a> Ver </a>"+
+                    "<a class='btn btn-success'> Ver </a>"+
                     "</td>"+
                     "</tr>";    
 
@@ -126,10 +126,10 @@ function mostrarpedidospormesa(idmesa){
                    datapedidos.pedidos[index].estado +
                    "</td>"+
                    "<td>"+
-                   datapedidos.pedidos[index].totalapagar +
+                   datapedidos.pedidos[index].totalapagar + " s/."+
                    "</td>"+
                    "<td>"+
-                   "<a> Ver </a>"+
+                   "<a class='btn btn-success'> Ver </a>"+
                    "</td>"+
                    "</tr>";    
 
@@ -166,10 +166,10 @@ function mostrarpedidospormesero(iduser){
                 datapedidos.pedidos[index].estado +
                 "</td>"+
                 "<td>"+
-                datapedidos.pedidos[index].totalapagar +
+                datapedidos.pedidos[index].totalapagar + " s/." +
                 "</td>"+
                 "<td>"+
-                "<a> Ver </a>"+
+                "<a class='btn btn-success'> Ver </a>"+
                 "</td>"+
                 "</tr>";    
 

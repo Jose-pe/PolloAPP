@@ -59,3 +59,4 @@ Route::get('pedidospormesa/{idmesa}',[App\Http\Controllers\PedidoController::cla
 Route::get('listarboletas', [App\Http\Controllers\BoletaController::class, 'index'])->name('listarboletas')->middleware(checkmesa::class, checkcaja::class);
 Route::get('mostrarcajeros', [App\Http\Controllers\UserController::class, 'listarcajerosjson'])->name('mostrarcajerosjson')->middleware(checkmesa::class, checkcaja::class);
 Route::get('boletasporuser/{iduser}',[App\Http\Controllers\BoletaController::class, 'boletasporuser'])->name('boletasporuser')->middleware(checkmesa::class, checkcaja::class);
+Route::get('boletasporfecha/{fecha}', [App\Http\Controllers\BoletaController::class, 'boletasporfecha'])->name('boletasporfecha')->middleware(checkmesa::class, checkcaja::class);

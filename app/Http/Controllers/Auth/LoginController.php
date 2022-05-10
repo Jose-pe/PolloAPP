@@ -28,7 +28,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-    
+
     protected function redirectTo()
     {
         if (auth()->user()->rol == 'Admin') {
@@ -40,7 +40,7 @@ class LoginController extends Controller
         if (auth()->user()->rol == 'Mesero') {
             return '/mesasmesero';
         }
-        
+
     }
     /**
      * Create a new controller instance.

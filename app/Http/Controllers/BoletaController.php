@@ -97,4 +97,11 @@ class BoletaController extends Controller
                 'boletas' => $boletas
             ),200);
     }
+    public function boletasporfecha($fecha){
+        $boletas = Boleta::where('fecha', $fecha)->get();
+        return Response::json(
+            array('success'=>true,
+                'boletas'=>$boletas
+        ),200);
+    }
 }

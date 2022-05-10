@@ -1,6 +1,6 @@
 @extends('layouts.layoutadmin')
 @section('content')
-<div class="container">
+<div class="container-fluid">
 <div class="d-flex justify-content-center mt-5">
     <h2>ADMINISTRADOR DE PLATILLOS </h2>
     <div class="m-5">

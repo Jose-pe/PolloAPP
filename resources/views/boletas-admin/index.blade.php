@@ -22,7 +22,7 @@
                         <div class="col-6">
                           <div class="row">
                             <div class="input-group">
-                                <input type="date" class="form-control" id="fechaboleta" aria-describedby="button-addon2">
+                                <input type="date" class="form-control" id="selectfecha" aria-describedby="button-addon2">
                             </div>
                         </div>
                         </div>
